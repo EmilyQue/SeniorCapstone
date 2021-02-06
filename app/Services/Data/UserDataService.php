@@ -19,15 +19,17 @@ class UserDataService {
         $email = $user->getEmail();
         $username = $user->getUsername();
         $password = $user->getPassword();
+        $role = $user->getRole();
 
         //prepared statements is created
-        $stmt = $this->conn->prepare("INSERT INTO `users` (`firstName`, `lastName`, `email`, `username`, `password`) VALUES (:firstName, :lastName, :email, :username, :password)");
+        $stmt = $this->conn->prepare("INSERT INTO `users` (`firstName`, `lastName`, `email`, `username`, `password`, `role`) VALUES (:firstName, :lastName, :email, :username, :password, :role)");
         //binds parameters
         $stmt->bindParam(':firstName', $firstName);
         $stmt->bindParam(':lastName', $lastName);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':role', $role);
 
         /*see if user existed and return true if found
         else return false if not found*/

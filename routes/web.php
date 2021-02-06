@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/home', function () {
-    return view('login');
+    return view('home');
 });
 
 /*Route is mapped to the '/login' URI and will return the login view */
@@ -25,6 +25,8 @@ Route::get('/login', function() {
 /*Fetches the post parameters of login*/
 Route::post('/login', 'App\Http\Controllers\LoginController@index');
 
+Route::get('/logout', 'App\Http\Controllers\LoginController@logout');
+
 /*Route is mapped to the '/register' URI and will return the register view */
 Route::get('/register', function() {
     return view('register');
@@ -32,3 +34,11 @@ Route::get('/register', function() {
 
 /*Fetches the post parameters of registration*/
 Route::post('/register', 'App\Http\Controllers\RegisterController@index');
+
+/*Route is mapped to the '/register' URI and will return the register view */
+Route::get('/addPost', function() {
+    return view('addPost');
+});
+
+/*Fetches the post parameters of registration*/
+Route::post('/addPost', 'App\Http\Controllers\PostController@index');
