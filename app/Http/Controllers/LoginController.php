@@ -26,7 +26,7 @@ class LoginController extends Controller
 
             //2. create object model
             //save posted form data in user object model
-            $user = new UserModel(0, 0, 0, 0, $username, $password, 0);
+            $user = new UserModel(0, 0, 0, 0, $username, $password, 0, 0);
 
             //3. execute business service
             //call security business service
@@ -42,15 +42,14 @@ class LoginController extends Controller
                 $request->session()->put('username', $username);
                 $request->session()->put('user_id', $user_id);
                 $request->session()->put('role', $user_id);
+                $request->session()->put('active', $user_id);
 
                 return redirect('home');
             }
 
             else {
-                // return view('loginFail');
                 return redirect()->back()->with('message', 'Login Failed');
             }
-
     }
 
     /**

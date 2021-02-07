@@ -6,13 +6,15 @@
     <div class="shadow-box">
         {{-- Search Bar --}}
         <div id="search">
-            <input type="text" class="searchTerm" placeholder="What are you looking for?">
+            <form action="/search">
+            <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
             <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
             </button>
+            </form>
         </div>
 
-        <header class="masthead text-white text-center">
+        <header class="masthead text-white text-left">
             <div class="overlay"></div>
             <div class="container">
               <div class="row">
@@ -23,6 +25,55 @@
               </div>
             </div>
           </header>
+
+        <div class="content">
+            <h1>Recent Posts</h1>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <div class="card-img">
+                                <img src="images/santorini.jpg" alt="">
+                            </div>
+                            <div class="card-desc">
+                                <h3>Title</h3>
+                                <p>Description</p>
+                                <p>Author</p>
+                                <p>Date</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <div class="card-img">
+                                <img src="images/santorini.jpg" alt="">
+                            </div>
+                            <div class="card-desc">
+                                <h3>Title</h3>
+                                <p>Description</p>
+                                <p>Author</p>
+                                <p>Date</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card-content">
+                            <div class="card-img">
+                                <img src="images/santorini.jpg" alt="">
+                            </div>
+                            <div class="card-desc">
+                                <h3>Title</h3>
+                                <p>Author</p>
+                                <p>Date</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 </div>

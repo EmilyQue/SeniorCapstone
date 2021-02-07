@@ -34,4 +34,28 @@ class PostController extends Controller {
             return view("registerFail");
         }
     }
+
+    /**
+     * This method is to search for a blog post based on keywords in the blog post title and description
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|boolean
+     */
+    public function searchBlogPost(Request $request){
+        //1. process form data
+        //get posted form data
+        $post = $request->input('search');
+
+        //call job posting business service
+        $service = new PostBusinessService();
+        $blogPost = $service->findPostByName($post);
+
+        //returns the results of the search
+        if ($blogPost > 0) {
+            return view('searchView')->with('blogPost', $blogPost);
+        }
+
+        else {
+            return false;
+        }
+    }
 }

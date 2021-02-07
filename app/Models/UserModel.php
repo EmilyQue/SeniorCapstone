@@ -10,8 +10,9 @@ class UserModel {
     private $username;
     private $password;
     private $role;
+    private $active;
 
-    public function __construct($id, $firstName, $lastName, $email, $username, $password, $role) {
+    public function __construct($id, $firstName, $lastName, $email, $username, $password, $role, $active) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -19,6 +20,7 @@ class UserModel {
         $this->username = $username;
         $this->password = $password;
         $this->role = $role;
+        $this->active = $active;
     }
 
     /**
@@ -78,6 +80,14 @@ class UserModel {
     }
 
     /**
+     * @return mixed
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
      * @param mixed $id
      */
     public function setId($id)
@@ -131,5 +141,13 @@ class UserModel {
     public function setRole($role)
     {
         $this->role = $role;
+    }
+
+    /**
+    * @param mixed $active
+    */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 }

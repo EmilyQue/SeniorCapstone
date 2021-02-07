@@ -8,11 +8,11 @@
         <div class="navbar-nav ml-auto">
             <?php if(session()->has('role')){
                 if (session('role') == 1) { ?>
-                <a href="/adminPosts" class="nav-item nav-link">Admin Posts</a>
-                <a href="/adminUsers" class="nav-item nav-link">Admin Users</a>
-                <a href="/profile" class="nav-item nav-link">Admin {{session()->get('username')}}</a>
+                <a href="/usersAdmin" class="nav-item nav-link">Admin Users</a>
+                <a href="" class="nav-item nav-link">Admin {{session()->get('username')}}</a>
                 <a href="/logout" class="nav-item nav-link">Logout</a>
-            <?php }} ?>
+            <?php }
+        } ?>
 
 
             <?php if(session()->has('user_id') && session()->has('role')){
@@ -21,7 +21,12 @@
                     <a href="/userPosts" class="nav-item nav-link">My Posts</a>
                     <a href="/profile" class="nav-item nav-link">{{session()->get('username')}}'s Profile</a>
                     <a href="/logout" class="nav-item nav-link">Logout</a>
-            <?php }} ?>
+            <?php }}
+                else {     ?>
+                    <a href="/login" class="nav-item nav-link">Login</a>
+                    <a href="/register" class="nav-item nav-link">Register</a>
+              <?php
+        } ?>
         </div>
     </div>
 </nav>

@@ -12,6 +12,7 @@
             <div class="form-group">
                 <input type="password" class="form-control" name="password" placeholder="Password" required="required">
             </div>
+            <div><input type="hidden" name="active"/></div>
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>

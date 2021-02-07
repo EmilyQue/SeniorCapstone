@@ -35,4 +35,28 @@ class PostDataService {
             return false;
         }
     }
+
+    /**
+     * Finds the blog post by name/description
+     * @param  $post
+     * @return array
+     */
+    public function findPostByName($post) {
+        //prepared statement is created and user id is binded
+        $stmt = $this->conn->prepare("SELECT id, title, description, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
+
+        //array is created and statement is executed
+        $list = array();
+        $stmt->execute();
+
+        //loops through table  using stmt->fetch
+        for ($i = 0; $row = $stmt->fetch(); $i++) {
+            //contact model is created
+            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['users_id']);
+            //inserts variables into end of array
+            array_push($list, $postSearch);
+        }
+        //return list array that holds contact variables
+        return $list;
+    }
 }

@@ -21,7 +21,7 @@ class RegisterController extends Controller {
 
             //2. create object model
             //save posted form data in user object model
-            $user = new UserModel(-1, $firstName, $lastName, $email, $username, $password, 0);
+            $user = new UserModel(-1, $firstName, $lastName, $email, $username, $password, 0, 0);
 
             //3. execute business service
             //call user business service

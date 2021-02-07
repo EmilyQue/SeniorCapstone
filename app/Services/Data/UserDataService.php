@@ -20,9 +20,10 @@ class UserDataService {
         $username = $user->getUsername();
         $password = $user->getPassword();
         $role = $user->getRole();
+        $active = $user->getActive();
 
         //prepared statements is created
-        $stmt = $this->conn->prepare("INSERT INTO `users` (`firstName`, `lastName`, `email`, `username`, `password`, `role`) VALUES (:firstName, :lastName, :email, :username, :password, :role)");
+        $stmt = $this->conn->prepare("INSERT INTO `users` (`firstName`, `lastName`, `email`, `username`, `password`, `role`, `active`) VALUES (:firstName, :lastName, :email, :username, :password, :role, :active)");
         //binds parameters
         $stmt->bindParam(':firstName', $firstName);
         $stmt->bindParam(':lastName', $lastName);
@@ -30,6 +31,7 @@ class UserDataService {
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
         $stmt->bindParam(':role', $role);
+        $stmt->bindParam(':active', $active);
 
         /*see if user existed and return true if found
         else return false if not found*/
@@ -51,10 +53,13 @@ class UserDataService {
         //select username and password and see if the row exists
         $username = $user->getUsername();
         $password = $user->getPassword();
+        $active = $user->getActive();
 
-        $stmt = $this->conn->prepare('SELECT * FROM users WHERE BINARY username = :username AND password = :password');
+        $stmt = $this->conn->prepare('SELECT * FROM users WHERE BINARY username = :username AND password = :password AND active = :active');
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $password);
+        $stmt->bindParam(':active', $active);
+
         $stmt->execute();
 
         /*see if user existed and return true if found
