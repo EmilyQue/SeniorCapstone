@@ -58,6 +58,18 @@ Route::post('/addPost', 'App\Http\Controllers\PostController@index');
 /*Fetches the get parameters of search blog post method in post controller*/
 Route::get('/search', 'App\Http\Controllers\PostController@searchBlogPost');
 
+/*Fetches the get parameters of user blog posts*/
+Route::get('/displayPosts', 'App\Http\Controllers\PostController@displayAllPosts');
+
+/*Route is mapped to the '/editPost' URI and will return the edit blog post form */
+Route::get('/editPost', 'App\Http\Controllers\PostController@findUserPosts');
+
+/*Fetches the post parameters of updated blog post*/
+Route::post('/updatePosts', 'App\Http\Controllers\PostController@updateBlogPost');
+
+/*Fetches the get parameters of deleteBlogPost method in Post controller*/
+Route::get('/deletePost', 'App\Http\Controllers\PostController@deleteBlogPost');
+
 /* ADMIN USERS */
 
 /*Fetches the get parameters of users admin*/

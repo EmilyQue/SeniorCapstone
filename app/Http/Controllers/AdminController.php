@@ -14,7 +14,7 @@ class AdminController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request) {
-        //call user business service
+        //call admin business service
         $service = new AdminBusinessService();
         $users = $service->showUsers();
         //render a response view
@@ -30,7 +30,7 @@ class AdminController extends Controller {
     public function suspendUser() {
         //GET method for user id
         $id = $_GET['id'];
-        //call user business service
+        //call admin business service
         $service = new AdminBusinessService();
         $suspend = $service->suspendUser($id);
         //renders a success or fail view
@@ -52,7 +52,7 @@ class AdminController extends Controller {
     public function unsuspendUser() {
         //GET method for user id
         $id = $_GET['id'];
-        //calls user business service
+        //calls admin business service
         $service = new AdminBusinessService();
         $unsuspend = $service->unsuspendUser($id);
         //renders a success or fail view

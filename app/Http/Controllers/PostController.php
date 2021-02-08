@@ -27,7 +27,7 @@ class PostController extends Controller {
         //4. process results from business service (navigation)
         //render a failed or success response view and pass the post model to it
         if ($status) {
-            return view("registerSuccess");
+            return view("displayPosts");
         }
 
         else {
@@ -56,6 +56,100 @@ class PostController extends Controller {
 
         else {
             return false;
+        }
+    }
+
+    /**
+     * This method is to display all posts from database
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function displayAllPosts(Request $request) {
+        //call post business service
+        $service = new PostBusinessService();
+        $posts = $service->findAllBlogPosts();
+        //render a response view
+        if ($posts) {
+            return view('displayPosts')->with($posts);
+        }
+    }
+
+    /**
+     * This method is to delete the blog post
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function deleteBlogPost(Request $request) {
+        //GET method for post id
+        $id = $request->session()->get('user_id');
+        //call user business service
+        $service = new PostBusinessService();
+        $delete = $service->removeBlogPost($id);
+
+        //render a success or fail view
+        if($delete) {
+            return view('displayPosts');
+        }
+
+        else {
+            return view('deleteFail');
+        }
+    }
+
+    /**
+     * This method is to find the user's blog posts
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|boolean
+     */
+    public function findUserPosts() {
+        //get posted form data
+        $id = session()->get('user_id');
+
+        //call post business service
+        $service = new PostBusinessService();
+        $userPosts = $service->findBlogPostByID($id);
+
+        //process results from business service (navigation)
+        //render a failed or edit blog post response view and pass the post model to it
+        if ($userPosts) {
+            return view('editBlogPost')->with('userPosts', $userPosts);
+        }
+
+        else {
+            return false;
+        }
+
+    }
+
+    /**
+     * This method is to update the user's blog post
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateBlogPost(Request $request) {
+        //get posted form data
+        $id = $request->input('id');
+        $title = $request->input('title');
+        $description = $request->input('description');
+
+        if ($request->session()->has('user_id')) {
+            $user_id = $request->session()->get('user_id');
+        }
+
+        //create object model and save posted form data in post object model
+        $blogPost = new PostModel($id, $title, $description, $user_id);
+
+        //execute business service and call post business service
+        $service = new PostBusinessService();
+        $status = $service->editPostInfo($blogPost);
+
+        //process results from business service (navigation)
+        //render a failed or redirect to profile view
+        if ($status) {
+            return view('displayPosts');
+        }
+
+        else {
+            return view('registerFail');
         }
     }
 }
