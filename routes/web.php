@@ -39,6 +39,12 @@ Route::get('/register', function() {
 /*Fetches the post parameters of registration*/
 Route::post('/register', 'App\Http\Controllers\RegisterController@index');
 
+/* USER PROFILE */
+/*Route is mapped to the '/addPost' URI and will return the addPost view */
+Route::get('/profile', function() {
+    return view('userProfile');
+});
+
 /* BLOG POSTS */
 
 /*Route is mapped to the '/addPost' URI and will return the addPost view */

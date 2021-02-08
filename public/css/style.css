@@ -255,6 +255,47 @@ header.masthead h1 {
     text-decoration: underline;
 }
 
+
+/* Profile */
+.profile-content{
+    width: auto;
+    margin: 50px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.profile-content .shadow-box {
+    margin-bottom: 15px;
+    background: #ffffff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    padding: 30px;
+}
+
+.profile-content .shadow-box .nav-item a{
+    color:black !important;
+}
+
+.profile-content .shadow-box .btn-primary{
+    background-color: #f08700;
+    color: white;
+    border: #f08700;
+}
+
+.profile-content .shadow-box .btn-primary:hover{
+    background-color: #f49f0a;
+    color: white;
+    border: #f49f0a;
+}
+
+/* recent travels */
+.profile-content .shadow-box .travels h3{
+    text-align: center;
+}
+
+.profile-content .shadow-box .travels .card-desc{
+    height:auto;
+}
+
 @media only screen and (max-width: 690px){
     .login-form, .register-form, .home-content {
         width: auto;

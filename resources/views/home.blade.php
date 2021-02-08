@@ -1,5 +1,5 @@
 @extends('layouts.appmaster')
-@section('title', 'Login Page')
+@section('title', 'Home Page')
 
 @section('content')
 <div class="home-content">
