@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\Data;
 
+use App\Models\CredentialsModel;
 use App\Models\UserModel;
 
 //Database interacts with the data from the Recipe class
@@ -49,7 +50,7 @@ class UserDataService {
      * @param UserModel $user
      * @return NULL
      */
-    public function findByUser(UserModel $user) {
+    public function findByUser(CredentialsModel $user) {
         //select username and password and see if the row exists
         $username = $user->getUsername();
         $password = $user->getPassword();

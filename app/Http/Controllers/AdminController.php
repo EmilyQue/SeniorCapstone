@@ -35,11 +35,13 @@ class AdminController extends Controller {
         $suspend = $service->suspendUser($id);
         //renders a success or fail view
         if($suspend) {
-            return view('suspendSuccess');
+            // return view('suspendSuccess');
+            return redirect()->back()->with('message', 'Account suspended');
         }
 
         else {
-            return view('suspendFail');
+            return redirect()->back()->with('message', 'Failed to suspend account');
+            // return view('suspendFail');
         }
     }
 
@@ -55,11 +57,13 @@ class AdminController extends Controller {
         $unsuspend = $service->unsuspendUser($id);
         //renders a success or fail view
         if($unsuspend) {
-            return view('unsuspendSuccess');
+            return redirect()->back()->with('message', 'Account was unsuspended');
+            // return view('unsuspendSuccess');
         }
 
         else {
-            return view('unsuspendFail');
+            return redirect()->back()->with('message', 'Failed to unsuspend account');
+            // return view('unsuspendFail');
         }
     }
 }

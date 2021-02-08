@@ -2,6 +2,7 @@
 /*Handles user business logic and connections to database*/
 namespace App\Services\Business;
 
+use App\Models\CredentialsModel;
 use \PDO;
 use App\Models\UserModel;
 use App\Services\Data\UserDataService;
@@ -34,7 +35,7 @@ class UserBusinessService {
      * @param UserModel $user
      * @return NULL
      */
-    public function login(UserModel $user) {
+    public function login(CredentialsModel $user) {
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");

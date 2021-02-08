@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Exception;
 use App\Models\UserModel;
+use App\Models\CredentialsModel;
 use App\Services\Business\UserBusinessService;
 
 class LoginController extends Controller
@@ -26,7 +27,7 @@ class LoginController extends Controller
 
             //2. create object model
             //save posted form data in user object model
-            $user = new UserModel(0, 0, 0, 0, $username, $password, 0, 0);
+            $user = new CredentialsModel(0, $username, $password, 0, 0);
 
             //3. execute business service
             //call security business service
@@ -48,6 +49,7 @@ class LoginController extends Controller
             }
 
             else {
+                // return view('loginFail');
                 return redirect()->back()->with('message', 'Login Failed');
             }
     }

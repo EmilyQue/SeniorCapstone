@@ -9,10 +9,20 @@ use App\Services\Business\AdminBusinessService;
 
 <head>
 <style>
+h1{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.alert{
+    margin-top: 25px;
+}
+
 #user {
     font-family: "Comic Sans", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    margin-top: 25px;
 }
 #user td, #user th {
     border: 1px solid #ddd;
@@ -28,7 +38,7 @@ use App\Services\Business\AdminBusinessService;
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    background-color: #7554ba;
+    background-color: #f08700;
     color: white;
 }
 #user thead {
@@ -51,10 +61,19 @@ use App\Services\Business\AdminBusinessService;
 	</thead>
 <tbody>
 
+<h1>All Users</h1>
+
+    @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+
 <?php
 //user business service is called
 $bs = new AdminBusinessService();
 $users = $bs->showUsers();
+
 //for loop to populate the data table in the displayUsers view
 for ($x = 0; $x < count($users); $x++) {
     if ($users[$x]['role'] != 1) {
