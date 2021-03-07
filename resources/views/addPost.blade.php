@@ -2,15 +2,23 @@
 @section('title', 'Add Post')
 
 @section('content')
+
     <div class="register-form">
         <form action="addPost" method="POST">
-            <h2 class="text-center">Add Post</h2>
+            <h1 class="text-center" style="color: #f08700">Add Post</h1>
+
             <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
             <div class="form-group">
                 <input type="text" class="form-control" name="title" placeholder="Title" required="required" value="{{ old("title") }}">
             </div>
             <div class="form-group">
                 <textarea class="form-control" name="description" placeholder="Description" required="required" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="date"/>
+            </div>
+            <div class="form-group">
+                <input type="file" id="myFile" name="image">
             </div>
             <div class="form-group">
                 <input type="hidden" name="users_id"/>
@@ -21,5 +29,4 @@
             </div>
         </form>
     </div>
-
  @endsection

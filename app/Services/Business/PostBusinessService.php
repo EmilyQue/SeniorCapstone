@@ -100,7 +100,31 @@ class PostBusinessService {
         return $flag;
     }
 
-/**
+    /**
+     * Finds the blog post info by user id
+     * @param $id
+     * @return array
+     */
+    public function findBlogPostByUserID($id) {
+        //get credentials for accessing the database
+        $servername = config("database.connections.mysql.host");
+        $dbname = config("database.connections.mysql.database");
+        $username = config("database.connections.mysql.username");
+        $password = config("database.connections.mysql.password");
+
+        //create connection
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        //create a post dao with this connection and try to find blog post by id
+        $service = new PostDataService($conn);
+        $flag = $service->findPostByUserID($id);
+
+        //return the finder results
+        return $flag;
+    }
+
+    /**
      * Finds the blog post info by id
      * @param $id
      * @return array

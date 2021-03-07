@@ -17,18 +17,22 @@ class PostDataService {
         //select variables and see if the row exists
         $title = $post->getTitle();
         $description = $post->getDescription();
+        $date = date('m/d/Y');
+        $image = $post->getImage();
         $user_id = $post->getUser_id();
 
         //prepared statements is created
-        $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `users_id`) VALUES (:title, :description, :user_id)");
+        $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `date`, `image`, `users_id`) VALUES (:title, :description, :date, :image, :user_id)");
         //binds parameters
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':date', $date);
+        $stmt->bindParam(':image', $image);
         $stmt->bindParam(':user_id', $user_id);
 
-        /*see if user existed and return true if found
+        /*see if post was added
         else return false if not found*/
-        if ($stmt->execute() >= 1) {
+        if ($stmt->execute()) {
             return true;
         }
 
@@ -44,7 +48,7 @@ class PostDataService {
      */
     public function findPostByName($post) {
         //prepared statement is created
-        $stmt = $this->conn->prepare("SELECT id, title, description, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
+        $stmt = $this->conn->prepare("SELECT id, title, description, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
 
         //array is created and statement is executed
         $list = array();
@@ -53,7 +57,7 @@ class PostDataService {
         //loops through table  using stmt->fetch
         for ($i = 0; $row = $stmt->fetch(); $i++) {
             //post model is created
-            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['users_id']);
+            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
             //inserts variables into end of array
             array_push($list, $postSearch);
         }
@@ -112,7 +116,7 @@ class PostDataService {
      * @param  $id
      * @return array
      */
-    public function findPostByID($id) {
+    public function findPostByUserID($id) {
         //prepared statement is created and user id is binded
         $stmt = $this->conn->prepare('SELECT * FROM posts WHERE users_id = :id');
         $stmt->bindParam(':id', $id);
@@ -124,7 +128,32 @@ class PostDataService {
         //loops through table  using stmt->fetch
         for ($i = 0; $row = $stmt->fetch(); $i++) {
             //post model is created
-            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $id);
+            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $id);
+            //inserts variables into end of array
+            array_push($list, $postSearch);
+        }
+        //return list array that holds job variables
+        return $list;
+    }
+
+    /**
+     * Finds the post by post id
+     * @param  $id
+     * @return array
+     */
+    public function findPostByID($id) {
+        //prepared statement is created and user id is binded
+        $stmt = $this->conn->prepare('SELECT * FROM posts WHERE id = :id');
+        $stmt->bindParam(':id', $id);
+
+        //list array is created and statement is executed
+        $list = array();
+        $stmt->execute();
+
+        //loops through table  using stmt->fetch
+        for ($i = 0; $row = $stmt->fetch(); $i++) {
+            //post model is created
+            $postSearch = new PostModel($id, $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
             //inserts variables into end of array
             array_push($list, $postSearch);
         }

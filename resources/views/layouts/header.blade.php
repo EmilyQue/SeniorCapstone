@@ -18,7 +18,7 @@
             <?php if(session()->has('user_id') && session()->has('role')){
                 if (session('role') != 1) { ?>
                     <a href="/addPost" class="nav-item nav-link">Add Post</a>
-                    <a href="/displayPosts" class="nav-item nav-link">My Posts</a>
+                    <a href="/displayMyPosts" class="nav-item nav-link">My Posts</a>
                     <a href="/profile" class="nav-item nav-link">{{session()->get('username')}}'s Profile</a>
                     <a href="/logout" class="nav-item nav-link">Logout</a>
             <?php }}

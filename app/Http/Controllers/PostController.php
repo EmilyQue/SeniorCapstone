@@ -11,13 +11,15 @@ class PostController extends Controller {
         //recieves data inputed from user
         $title = $request->input('title');
         $description = $request->input('description');
+        $date = $request->input('date');
+        $image = $request->input('image');
 
         if($request->session()->has('user_id')) {
             $user_id = $request->session()->get('user_id');
         }
         //2. create object model
         //save posted form data in post object model
-        $post = new PostModel(-1, $title, $description, $user_id);
+        $post = new PostModel(-1, $title, $description, $date, $image, $user_id);
 
         //3. execute business service
         //call post business service
@@ -27,7 +29,7 @@ class PostController extends Controller {
         //4. process results from business service (navigation)
         //render a failed or success response view and pass the post model to it
         if ($status) {
-            return view("displayPosts");
+            return redirect()->action('App\Http\Controllers\PostController@displayUserPosts');
         }
 
         else {
@@ -60,6 +62,42 @@ class PostController extends Controller {
     }
 
     /**
+     * This method is to display all posts from user
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function displayUserPosts(Request $request) {
+        //get session user id and username
+        $id = session()->get('user_id');
+        $username = session()->get('username');
+
+        //call post business service
+        $service = new PostBusinessService();
+        $posts = $service->findBlogPostByUserID($id);
+
+        //render a response view
+        return view('displayMyPosts')->with(['posts' => $posts, 'username' => $username]);
+    }
+
+    /**
+     * This method is to display single blog post
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function displaySinglePost(Request $request) {
+        //get session user id and username
+        $id = $_GET['id'];
+        $username = session()->get('username');
+
+        //call post business service
+        $service = new PostBusinessService();
+        $posts = $service->findBlogPostByID($id);
+
+        //render a response view
+        return view('displaySinglePost')->with(['posts' => $posts, 'username' => $username]);
+    }
+
+    /**
      * This method is to display all posts from database
      * @param Request $request
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
@@ -68,6 +106,7 @@ class PostController extends Controller {
         //call post business service
         $service = new PostBusinessService();
         $posts = $service->findAllBlogPosts();
+
         //render a response view
         if ($posts) {
             return view('displayPosts')->with($posts);
@@ -129,6 +168,7 @@ class PostController extends Controller {
         //get posted form data
         $id = $request->input('id');
         $title = $request->input('title');
+        $date = $request->input('date');
         $description = $request->input('description');
 
         if ($request->session()->has('user_id')) {
@@ -136,7 +176,7 @@ class PostController extends Controller {
         }
 
         //create object model and save posted form data in post object model
-        $blogPost = new PostModel($id, $title, $description, $user_id);
+        $blogPost = new PostModel($id, $title, $description, $date, $user_id);
 
         //execute business service and call post business service
         $service = new PostBusinessService();
