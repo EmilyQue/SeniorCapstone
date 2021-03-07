@@ -6,6 +6,7 @@ use App\Models\CredentialsModel;
 use \PDO;
 use App\Models\UserModel;
 use App\Services\Data\UserDataService;
+use Illuminate\Support\Facades\Log;
 
 class UserBusinessService {
 /**
@@ -14,6 +15,8 @@ class UserBusinessService {
      * @return boolean
      */
     public function create(UserModel $user) {
+        Log::info("Entering UserBusinessService.create()");
+
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
         $username = config("database.connections.mysql.username");
@@ -27,6 +30,7 @@ class UserBusinessService {
         $flag = $service->createUser($user);
 
         //return the finder results
+        Log::info("Exit UserBusinessService.create() with " . $flag);
         return $flag;
     }
 
@@ -36,6 +40,8 @@ class UserBusinessService {
      * @return NULL
      */
     public function login(CredentialsModel $user) {
+        Log::info("Entering UserBusinessService.login()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -51,6 +57,7 @@ class UserBusinessService {
         $flag = $service->findByUser($user);
 
         //return the finder results
+        Log::info("Exit UserBusinessService.login() with " . $flag);
         return $flag;
     }
 }

@@ -7,12 +7,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Exception;
-use App\Models\UserModel;
 use App\Models\CredentialsModel;
 use App\Services\Business\UserBusinessService;
+use Illuminate\Support\Facades\Log;
+use App\Services\Utility\ILoggerService;
 
-class LoginController extends Controller
-{
+class LoginController extends Controller {
+    /**
+     * Uses the logger service to log any messages
+     * @param ILoggerService $logger
+     */
+    public function __construct(ILoggerService $logger) {
+        $this->logger = $logger;
+     }
+
     /**
      * This method authenticates the user's credentials
      * @param Request $request
@@ -20,6 +28,8 @@ class LoginController extends Controller
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request) {
+        try{
+            $this->logger->info("Entering LoginController.index()");
             //1. process form data
             //get posted form data
             $username = $request->input('username');
@@ -52,6 +62,14 @@ class LoginController extends Controller
                 // return view('loginFail');
                 return redirect()->back()->with('message', 'Login Failed');
             }
+        }
+
+        catch (Exception $e){
+            //log exception and display exception view
+            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            $data = ['errorMsg' => $e->getMessage()];
+            return view('exception')->with($data);
+        }
     }
 
     /**
@@ -60,19 +78,18 @@ class LoginController extends Controller
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request) {
-        // try {
+        try {
             //$request->session()->forget('user_id');
             $request->session()->flush();
             $request->session()->regenerate(true);
             return redirect('/login');
-        // }
+        }
 
-        // catch (Exception $e){
-        //     //best practice: call all exceptions, log the exception, and display a common error page (or use a global exception handler)
-        //     //log exception and display exception view
-        //     Log::error("Exception: ", array("message" => $e->getMessage()));
-        //     $data = ['errorMsg' => $e->getMessage()];
-        //     return view('exception')->with($data);
-        // }
+        catch (Exception $e){
+            //log exception and display exception view
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            $data = ['errorMsg' => $e->getMessage()];
+            return view('exception')->with($data);
+        }
     }
 }

@@ -5,6 +5,7 @@ namespace App\Services\Business;
 use \PDO;
 use App\Models\PostModel;
 use App\Services\Data\PostDataService;
+use Illuminate\Support\Facades\Log;
 
 class PostBusinessService {
 /**
@@ -13,6 +14,8 @@ class PostBusinessService {
      * @return boolean
      */
     public function create(PostModel $post) {
+        Log::info("Entering PostBusinessService.create()");
+
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
         $username = config("database.connections.mysql.username");
@@ -26,6 +29,7 @@ class PostBusinessService {
         $flag = $service->createPost($post);
 
         //return the finder results
+        Log::info("Exit PostBusinessService.create() with " . $flag);
         return $flag;
     }
 
@@ -35,6 +39,8 @@ class PostBusinessService {
      * @return array
      */
     public function findPostByName($post) {
+        Log::info("Entering PostBusinessService.findPostByName()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -50,6 +56,7 @@ class PostBusinessService {
         $flag = $service->findPostByName($post);
 
         //return the finder results
+        Log::info("Exit PostBusinessService.findPostByName() with " .  print_r($flag, true));
         return $flag;
     }
 
@@ -58,6 +65,8 @@ class PostBusinessService {
      * @return array
      */
     public function findAllBlogPosts() {
+        Log::info("Entering PostBusinessService.findAllBlogPosts()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -73,6 +82,7 @@ class PostBusinessService {
         $flag = $service->findAllPosts();
 
         //return the finder results
+        Log::info("Exit PostBusinessService.findAllBlogPosts() with " . $flag);
         return $flag;
     }
 
@@ -82,6 +92,8 @@ class PostBusinessService {
      * @return boolean
      */
     public function removeBlogPost($id) {
+        Log::info("Entering PostBusinessService.removeBlogPost()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -97,6 +109,7 @@ class PostBusinessService {
         $flag = $service->deletePost($id);
 
         //return the finder results
+        Log::info("Exit PostBusinessService.removeBlogPost() with " . $flag);
         return $flag;
     }
 
@@ -106,6 +119,8 @@ class PostBusinessService {
      * @return array
      */
     public function findBlogPostByUserID($id) {
+        Log::info("Entering PostBusinessService.findBlogPostByUserID()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -121,6 +136,7 @@ class PostBusinessService {
         $flag = $service->findPostByUserID($id);
 
         //return the finder results
+        Log::info("Exit PostBusinessService.findBlogPostByUserID() with " . print_r($flag, true));
         return $flag;
     }
 
@@ -130,6 +146,8 @@ class PostBusinessService {
      * @return array
      */
     public function findBlogPostByID($id) {
+        Log::info("Entering PostBusinessService.findBlogPostByID()");
+
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -145,6 +163,7 @@ class PostBusinessService {
         $flag = $service->findPostByID($id);
 
         //return the finder results
+        Log::info("Exit PostBusinessService.findBlogPostByID() with " . print_r($flag, true));
         return $flag;
     }
 
@@ -153,8 +172,9 @@ class PostBusinessService {
      * @param PostModel $post
      * @return boolean
      */
-    public function editPostInfo(PostModel $post)
-    {
+    public function editPostInfo(PostModel $post) {
+        Log::info("Entering PostBusinessService.editPostInfo()");
+
         // get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -166,7 +186,9 @@ class PostBusinessService {
         // create a post dao with this connection and try to update blog post info
         $service = new PostDataService($conn);
         $flag = $service->updatePost($post);
+
         // return the finder results
+        Log::info("Exit PostBusinessService.editPostInfo() with " . $flag);
         return $flag;
     }
 }

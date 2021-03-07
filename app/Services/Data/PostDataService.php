@@ -3,6 +3,9 @@ namespace App\Services\Data;
 
 use App\Models\PostModel;
 use PDO;
+use Illuminate\Support\Facades\Log;
+use App\Services\Utility\DatabaseException;
+use PDOException;
 
 //Database interacts with the data from the Post class
 class PostDataService {
@@ -14,30 +17,41 @@ class PostDataService {
 
     // Method to add post to database
     public function createPost(PostModel $post) {
-        //select variables and see if the row exists
-        $title = $post->getTitle();
-        $description = $post->getDescription();
-        $date = date('m/d/Y');
-        $image = $post->getImage();
-        $user_id = $post->getUser_id();
+        Log::info("Entering PostDataService.createPost()");
+        try{
+            //select variables and see if the row exists
+            $title = $post->getTitle();
+            $description = $post->getDescription();
+            $date = date('m/d/Y');
+            $image = $post->getImage();
+            $user_id = $post->getUser_id();
 
-        //prepared statements is created
-        $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `date`, `image`, `users_id`) VALUES (:title, :description, :date, :image, :user_id)");
-        //binds parameters
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
-        $stmt->bindParam(':date', $date);
-        $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':user_id', $user_id);
+            //prepared statements is created
+            $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `date`, `image`, `users_id`) VALUES (:title, :description, :date, :image, :user_id)");
+            //binds parameters
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':date', $date);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':user_id', $user_id);
 
-        /*see if post was added
-        else return false if not found*/
-        if ($stmt->execute()) {
-            return true;
+            /*see if post was added
+            else return false if not found*/
+            if ($stmt->execute()) {
+                Log::info("Exit PostDataService.createPost() with true");
+                return true;
+            }
+
+            else {
+                Log::info("Exit PostDataService.createPost() with false");
+                return false;
+            }
         }
 
-        else {
-            return false;
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 
@@ -47,22 +61,32 @@ class PostDataService {
      * @return array
      */
     public function findPostByName($post) {
-        //prepared statement is created
-        $stmt = $this->conn->prepare("SELECT id, title, description, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
+        Log::info("Entering PostDataService.findPostByName()");
+        try{
+            //prepared statement is created
+            $stmt = $this->conn->prepare("SELECT id, title, description, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
 
-        //array is created and statement is executed
-        $list = array();
-        $stmt->execute();
+            //array is created and statement is executed
+            $list = array();
+            $stmt->execute();
 
-        //loops through table  using stmt->fetch
-        for ($i = 0; $row = $stmt->fetch(); $i++) {
-            //post model is created
-            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
-            //inserts variables into end of array
-            array_push($list, $postSearch);
+            //loops through table  using stmt->fetch
+            for ($i = 0; $row = $stmt->fetch(); $i++) {
+                //post model is created
+                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
+                //inserts variables into end of array
+                array_push($list, $postSearch);
+            }
+            //return list array that holds post variables
+            Log::info("Exit PostDataService.findPostByName() with true");
+            return $list;
         }
-        //return list array that holds post variables
-        return $list;
+
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
     }
 
     /**
@@ -70,21 +94,31 @@ class PostDataService {
      * @return array
      */
     public function findAllPosts() {
-        //prepared statement is created to display posts
-        $stmt = $this->conn->prepare('SELECT * from posts');
-        //executes prepared query
-        $stmt->execute();
+        Log::info("Entering PostDataService.findAllPosts()");
+        try{
+            //prepared statement is created to display posts
+            $stmt = $this->conn->prepare('SELECT * from posts');
+            //executes prepared query
+            $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-            //post array is created
-            $postArray = array();
-            //fetches result from prepared statement and returns as an array
-            while ($post = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                //inserts variables into end of array
-                array_push($postArray, $post);
+            if ($stmt->rowCount() > 0) {
+                //post array is created
+                $postArray = array();
+                //fetches result from prepared statement and returns as an array
+                while ($post = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    //inserts variables into end of array
+                    array_push($postArray, $post);
+                }
+                //return post array
+                Log::info("Exiting PostDataService.findAllPosts() with true");
+                return $postArray;
             }
-            //return post array
-            return $postArray;
+        }
+
+        catch(PDOException $e) {
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 
@@ -94,20 +128,31 @@ class PostDataService {
      * @return boolean
      */
     public function deletePost($id) {
-        //prepared statement is created
-        $stmt = $this->conn->prepare('DELETE FROM posts WHERE `id` = :id');
-        //bind parameter
-        $stmt->bindParam(':id', $id);
-        //executes statement
-        $delete = $stmt->execute();
+        Log::info("Entering PostDataService.deletePost()");
+        try{
+            //prepared statement is created
+            $stmt = $this->conn->prepare('DELETE FROM posts WHERE `id` = :id');
+            //bind parameter
+            $stmt->bindParam(':id', $id);
+            //executes statement
+            $delete = $stmt->execute();
 
-        //returns true or false if post has been deleted from database
-        if ($delete) {
-            return true;
+            //returns true or false if post has been deleted from database
+            if ($delete) {
+                Log::info("Exiting PostDataService.deletePost() with true");
+                return true;
+            }
+
+            else {
+                Log::info("Exiting PostDataService.deletePost() with false");
+                return false;
+            }
         }
 
-        else {
-            return false;
+        catch (PDOException $e) {
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 
@@ -117,23 +162,33 @@ class PostDataService {
      * @return array
      */
     public function findPostByUserID($id) {
-        //prepared statement is created and user id is binded
-        $stmt = $this->conn->prepare('SELECT * FROM posts WHERE users_id = :id');
-        $stmt->bindParam(':id', $id);
+        Log::info("Entering PostDataService.findPostByUserID()");
+        try{
+            //prepared statement is created and user id is binded
+            $stmt = $this->conn->prepare('SELECT * FROM posts WHERE users_id = :id');
+            $stmt->bindParam(':id', $id);
 
-        //list array is created and statement is executed
-        $list = array();
-        $stmt->execute();
+            //list array is created and statement is executed
+            $list = array();
+            $stmt->execute();
 
-        //loops through table  using stmt->fetch
-        for ($i = 0; $row = $stmt->fetch(); $i++) {
-            //post model is created
-            $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $id);
-            //inserts variables into end of array
-            array_push($list, $postSearch);
+            //loops through table  using stmt->fetch
+            for ($i = 0; $row = $stmt->fetch(); $i++) {
+                //post model is created
+                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $id);
+                //inserts variables into end of array
+                array_push($list, $postSearch);
+            }
+            //return list array that holds job variables
+            Log::info("Exiting PostDataService.findPostByUserID() with true");
+            return $list;
         }
-        //return list array that holds job variables
-        return $list;
+
+        catch (PDOException $e) {
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
     }
 
     /**
@@ -142,23 +197,33 @@ class PostDataService {
      * @return array
      */
     public function findPostByID($id) {
-        //prepared statement is created and user id is binded
-        $stmt = $this->conn->prepare('SELECT * FROM posts WHERE id = :id');
-        $stmt->bindParam(':id', $id);
+        Log::info("Entering PostDataService.findPostByUserID()");
+        try{
+            //prepared statement is created and user id is binded
+            $stmt = $this->conn->prepare('SELECT * FROM posts WHERE id = :id');
+            $stmt->bindParam(':id', $id);
 
-        //list array is created and statement is executed
-        $list = array();
-        $stmt->execute();
+            //list array is created and statement is executed
+            $list = array();
+            $stmt->execute();
 
-        //loops through table  using stmt->fetch
-        for ($i = 0; $row = $stmt->fetch(); $i++) {
-            //post model is created
-            $postSearch = new PostModel($id, $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
-            //inserts variables into end of array
-            array_push($list, $postSearch);
+            //loops through table  using stmt->fetch
+            for ($i = 0; $row = $stmt->fetch(); $i++) {
+                //post model is created
+                $postSearch = new PostModel($id, $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
+                //inserts variables into end of array
+                array_push($list, $postSearch);
+            }
+            //return list array that holds job variables
+            Log::info("Exiting PostDataService.findPostByID() with true");
+            return $list;
         }
-        //return list array that holds job variables
-        return $list;
+
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
     }
 
     /**
@@ -166,29 +231,41 @@ class PostDataService {
      * @param PostModel $post
      * @return boolean
      */
-    public function updatePost(PostModel $post)
-    {
-        // select variables and see if the row exists
-        $id = $post->getId();
-        $title = $post->getTitle();
-        $description = $post->getdescription();
+    public function updatePost(PostModel $post) {
+        Log::info("Entering PostDataService.updatePost()");
+        try{
+            // select variables and see if the row exists
+            $id = $post->getId();
+            $title = $post->getTitle();
+            $description = $post->getdescription();
 
-        // prepared statements is created
-        $stmt = $this->conn->prepare("UPDATE posts SET title = :title, description = :description WHERE id = :id");
-        // binds parameters
-        $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':title', $title);
-        $stmt->bindParam(':description', $description);
+            // prepared statements is created
+            $stmt = $this->conn->prepare("UPDATE posts SET title = :title, description = :description WHERE id = :id");
+            // binds parameters
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':description', $description);
 
-        $stmt->execute();
-        /*
-            * see if new blog post data was inserted
-            * else return false
-            */
-        if ($stmt->rowCount() == 1) {
-            return true;
-        } else {
-            return false;
+            $stmt->execute();
+            /*
+                * see if new blog post data was inserted
+                * else return false
+                */
+            if ($stmt->rowCount() == 1) {
+                Log::info("Exiting PostDataService.updatePost() with true");
+                return true;
+            }
+
+            else {
+                Log::info("Exiting PostDataService.updatePost() with false");
+                return false;
+            }
+        }
+
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 }

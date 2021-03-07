@@ -2,7 +2,9 @@
 namespace App\Services\Data;
 
 use PDO;
-
+use App\Services\Utility\DatabaseException;
+use PDOException;
+use Illuminate\Support\Facades\Log;
 
 //Database interacts with the data from the User class
 class AdminDataService {
@@ -17,21 +19,31 @@ class AdminDataService {
      * @return array
      */
     public function findAllUsers() {
-        //prepared statement is created to display users
-        $stmt = $this->conn->prepare('SELECT * from users');
-        //executes prepared query
-        $stmt->execute();
+        Log::info("Entering AdminDataService.findAllUsers()");
+        try{
+            //prepared statement is created to display users
+            $stmt = $this->conn->prepare('SELECT * from users');
+            //executes prepared query
+            $stmt->execute();
 
-        if ($stmt->rowCount() > 0) {
-            //user array is created
-            $userArray = array();
-            //fetches result from prepared statement and returns as an array
-            while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                //inserts variables into end of array
-                array_push($userArray, $user);
+            if ($stmt->rowCount() > 0) {
+                //user array is created
+                $userArray = array();
+                //fetches result from prepared statement and returns as an array
+                while ($user = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    //inserts variables into end of array
+                    array_push($userArray, $user);
+                }
+                //return user array
+                Log::info("Exiting AdminDataService.findAllUsers() with true");
+                return $userArray;
             }
-            //return user array
-            return $userArray;
+        }
+
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 
@@ -41,20 +53,31 @@ class AdminDataService {
      * @return boolean
      */
     public function suspendUser($id) {
-        //prepared statement is created
-        $stmt = $this->conn->prepare("UPDATE users SET `active` = '1' WHERE `id` = :id");
-        //bind parameter
-        $stmt->bindParam(':id', $id);
-        //executes statement
-        $suspend = $stmt->execute();
+        Log::info("Entering AdminDataService.suspendUser()");
+        try{
+            //prepared statement is created
+            $stmt = $this->conn->prepare("UPDATE users SET `active` = '1' WHERE `id` = :id");
+            //bind parameter
+            $stmt->bindParam(':id', $id);
+            //executes statement
+            $suspend = $stmt->execute();
 
-        //returns true or false if user active row has been set to 1
-        if ($suspend) {
-            return true;
+            //returns true or false if user active row has been set to 1
+            if ($suspend) {
+                Log::info("Exiting AdminDataService.suspendUser() with true");
+                return true;
+            }
+
+            else {
+                Log::info("Exiting AdminDataService.suspendUser() with false");
+                return false;
+            }
         }
 
-        else {
-            return false;
+        catch (PDOException $e){
+           //log and throw custom exception
+           Log::error("Exception: ", array("message" => $e->getMessage()));
+           throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 
@@ -64,20 +87,31 @@ class AdminDataService {
      * @return boolean
      */
     public function unsuspendUser($id) {
-        //prepared statement is created
-        $stmt = $this->conn->prepare("UPDATE users SET `active` = '0' WHERE `id` = :id");
-        //bind parameter
-        $stmt->bindParam(':id', $id);
-        //executes statement
-        $unsuspend = $stmt->execute();
+        Log::info("Entering AdminDataService.unsuspendUser()");
+        try{
+            //prepared statement is created
+            $stmt = $this->conn->prepare("UPDATE users SET `active` = '0' WHERE `id` = :id");
+            //bind parameter
+            $stmt->bindParam(':id', $id);
+            //executes statement
+            $unsuspend = $stmt->execute();
 
-        //returns true or false if user active row has been set to 0
-        if ($unsuspend) {
-            return true;
+            //returns true or false if user active row has been set to 0
+            if ($unsuspend) {
+                Log::info("Exiting AdminDataService.unsuspendUser() with false");
+                return true;
+            }
+
+            else {
+                Log::info("Exiting AdminDataService.unsuspendUser() with false");
+                return false;
+            }
         }
 
-        else {
-            return false;
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
 }

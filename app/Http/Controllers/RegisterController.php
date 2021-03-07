@@ -5,11 +5,23 @@ use Illuminate\Http\Request;
 use App\Models\UserModel;
 use App\Services\Business\UserBusinessService;
 use Illuminate\Validation\ValidationException;
+use App\Services\Utility\ILoggerService;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class RegisterController extends Controller {
+    /**
+     * Uses the logger service to log any messages
+     * @param ILoggerService $logger
+     */
+    public function __construct(ILoggerService $logger) {
+        $this->logger = $logger;
+    }
+
     //add a user
     public function index(Request $request){
         try{
+            $this->logger->info("Entering RegisterController.index()");
             $this->validateForm($request);
 
             //recieves data inputed from user
@@ -43,6 +55,12 @@ class RegisterController extends Controller {
             //must rethrow this exception in order for laravel to display your submitted page with errors
             //catch and rethrow data validation exception (so we can catch all others in our next exception catch block
             throw $e1;
+        }
+
+        catch (Exception $e){
+            //log exception and display exception view
+            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            return view("registerFail");
         }
     }
 
