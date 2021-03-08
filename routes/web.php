@@ -43,9 +43,27 @@ Route::post('/register', 'App\Http\Controllers\RegisterController@index');
 
 /* USER PROFILE */
 /*Route is mapped to the '/addPost' URI and will return the addPost view */
-Route::get('/profile', function() {
-    return view('userProfile');
-});
+// Route::get('/profile', function() {
+//     return view('userProfile');
+// });
+
+/*Fetches the get parameters of display profile method in profile controller*/
+Route::get('/profile', 'App\Http\Controllers\ProfileController@displayUserProfile');
+
+/*Fetches the post parameters of add profile info*/
+Route::post('/addProfile', 'App\Http\Controllers\ProfileController@index');
+
+/*Fetches the post parameters of profile info*/
+Route::get('/addProfile', 'App\Http\Controllers\ProfileController@displayUserProfile');
+
+/*Fetches the get parameters of update profile method in profile controller*/
+Route::get('/updateProfile', 'App\Http\Controllers\ProfileController@findProfile');
+
+/*Fetches post parameters of updated user profile info*/
+Route::post('/updateProfile', 'App\Http\Controllers\ProfileController@updateProfileInfo');
+
+/*Fetches post parameters of updated user recent travel info*/
+Route::post('/addRecentTravel', 'App\Http\Controllers\ProfileController@addRecentTravel');
 
 /* BLOG POSTS */
 

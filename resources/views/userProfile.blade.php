@@ -12,53 +12,90 @@
                         <li class="nav-item">
                             <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                         </li>
+
+                        @if(count($profile) != 0)
                         <li class="nav-item">
                             <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                         </li>
+                        @endif
                     </ul>
                     <div class="tab-content py-4">
                         <div class="tab-pane active" id="profile">
-                            <h5 class="mb-3">Emily Quevedo | <small>Phoenix, Arizona</small></h5>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h6>About Me</h6>
-                                    <p>
-                                        Hi! My name is Emily and I enjoy travelling. I love to share both personal and professional travel experiences in an honest blog post.
-                                        I've visited many destinations around the world including Rome, Athens, London, Peru, Amsterdam and many more! I aim to inspire fellow travellers to pursue their dream in traveling.
-                                    </p>
-                                </div>
-                            </div>
+                            @if(count($profile) != 0)
+                                @foreach($profile as $c)
+                                    <h5 class="mb-3">{{$c->getName()}} | <small>{{$c->getCountry()}}</small></h5>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <h6>About Me</h6>
+                                            <p>{{$c->getAbout()}}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                            @else
+                                <h4>Add Your Profile Information Here: </h4>
+                                <form role="form" action="addProfile" method="POST">
+                                    <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="text" value="" name="name" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="text" value="" name="country" required="required">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">About Me</label>
+                                        <div class="col-lg-9">
+                                            <textarea class="form-control" name="about" placeholder="" required="required" rows="3"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                                        <div class="col-lg-9">
+                                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                                        </div>
+                                    </div>
+                                </form>
+                            @endif
                         </div>
-
-                        <div class="tab-pane" id="edit">
-                            <form role="form">
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Name</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" type="text" value="">
-                                    </div>
+                        @if(count($profile) != 0)
+                            @foreach($profile as $p)
+                                <div class="tab-pane" id="edit">
+                                    <form role="form" action="updateProfile" method="POST">
+                                        <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
+                                        <input type="hidden" name="id" value='{{$p->getId()}}'/>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="name" value="{{$p->getName()}}" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
+                                            <div class="col-lg-9">
+                                                <input class="form-control" type="text" name="country" value="{{$p->getCountry()}}" required="required">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label">About Me</label>
+                                            <div class="col-lg-9">
+                                                <textarea class="form-control" name="about" placeholder="" required="required" rows="3">{{$p->getAbout()}}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-3 col-form-label form-control-label"></label>
+                                            <div class="col-lg-9">
+                                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" type="text" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">About Me</label>
-                                    <div class="col-lg-9">
-                                        <textarea class="form-control" name="description" placeholder="" required="required" rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                                    <div class="col-lg-9">
-                                        <input type="reset" class="btn btn-secondary" value="Cancel">
-                                        <input type="button" class="btn btn-primary" value="Save Changes">
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                @endforeach
+                            @endif
                     </div>
                 </div>
                 <div class="col-lg-4 order-lg-1 text-center">
@@ -79,43 +116,70 @@
         {{-- Recent Travels --}}
 
 <div class="travels">
-        <h3>Recent Travels</h3>
+        <h3>Recent Travels <i class="fas fa-plus-circle" data-toggle="modal" data-target="#myModal"></i></h3>
         <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <div class="card-content">
-                        <div class="card-img">
-                            <img src="images/machupicchu.jpg" alt="">
+                @if(count($travel) != 0)
+                    @foreach($travel as $p)
+                        <div class="col-md-4">
+                            <div class="card-content">
+                                <div class="card-img">
+                                    <img src="images/{{$p->getImage()}}" alt="">
+                                </div>
+                                <div class="card-desc">
+                                    <h3>{{$p->getDestination()}}</h3>
+                                    <p align="center"><small>{{date('m/d/Y', strtotime($p->getDeparture()))}} to {{date('m/d/Y', strtotime($p->getReturn()))}}</small></p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-desc">
-                            <h3>Machu Picchu, Peru</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-content">
-                        <div class="card-img">
-                            <img src="images/rome.jpg" alt="">
-                        </div>
-                        <div class="card-desc">
-                            <h3>Rome, Italy</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card-content">
-                        <div class="card-img">
-                            <img src="images/london.jpg" alt="">
-                        </div>
-                        <div class="card-desc">
-                            <h3>London, United Kingdom</h3>
-                        </div>
-                    </div>
-                </div>
+                    @endforeach
+                    @else
+                        <h5>Click the "+" to add any recent travels!</h5>
+                @endif
             </div>
         </div>
 </div>
     </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel" style="float: left">Add Recent Travel</h4>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+            <form action="addRecentTravel" method="POST">
+                <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
+                <div class="form-group">
+                    <label for="birthday">Destination:</label>
+                    <input type="text" class="form-control" name="destination" placeholder="Destination" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="departure">Departure:</label>
+                    <input type="date" id="departure_date" name="departure_date" required="required">
+                </div>
+                <div class="form-group">
+                    <label for="return">Return:</label>
+                    <input type="date" id="return_date" name="return_date" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="file" id="myFile" name="image" required="required">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" name="user_id"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                  </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 @endsection
