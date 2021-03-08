@@ -168,6 +168,33 @@ class PostBusinessService {
     }
 
     /**
+     * Finds the featured posts
+     * @param $id
+     * @return array
+     */
+    public function findFeaturedPosts() {
+        Log::info("Entering PostBusinessService.findFeaturedPosts()");
+
+        //get credentials for accessing the database
+        $servername = config("database.connections.mysql.host");
+        $dbname = config("database.connections.mysql.database");
+        $username = config("database.connections.mysql.username");
+        $password = config("database.connections.mysql.password");
+
+        //create connection
+        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        //create a post dao with this connection and try to find blog post by id
+        $service = new PostDataService($conn);
+        $flag = $service->findFeaturedPosts();
+
+        //return the finder results
+        Log::info("Exit PostBusinessService.findFeaturedPosts() with " . print_r($flag, true));
+        return $flag;
+    }
+
+    /**
      * Updates the blog post info
      * @param PostModel $post
      * @return boolean

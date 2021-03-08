@@ -33,42 +33,21 @@
                         <div class="tab-pane" id="edit">
                             <form role="form">
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Name</label>
                                     <div class="col-lg-9">
                                         <input class="form-control" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
                                     <div class="col-lg-9">
                                         <input class="form-control" type="text" value="">
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">About Me</label>
                                     <div class="col-lg-9">
-                                        <input class="form-control" type="email" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label"></label>
-                                    <div class="col-lg-6">
-                                        <input class="form-control" type="text" value="" placeholder="">
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <input class="form-control" type="text" value="" placeholder="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" type="text" value="">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                                    <div class="col-lg-9">
-                                        <input class="form-control" type="password" value="">
+                                        <textarea class="form-control" name="description" placeholder="" required="required" rows="3"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group row">

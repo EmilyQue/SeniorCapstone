@@ -17,7 +17,7 @@
                     </div>
                     <img src="images/{{$c->getImage()}}" class="card-img-top">
                     <div class="card-body">
-                    <p class="card-text">{{$c->getDescription()}}</p>
+                    <p class="card-text">{{$c->getContent()}}</p>
                     </div>
                 @endforeach
             @else

@@ -25,6 +25,7 @@ class PostController extends Controller {
             //recieves data inputed from user
             $title = $request->input('title');
             $description = $request->input('description');
+            $content = $request->input('content');
             $date = $request->input('date');
             $image = $request->input('image');
 
@@ -33,7 +34,7 @@ class PostController extends Controller {
             }
             //2. create object model
             //save posted form data in post object model
-            $post = new PostModel(-1, $title, $description, $date, $image, $user_id);
+            $post = new PostModel(-1, $title, $description, $content, $date, $image, $user_id);
 
             //3. execute business service
             //call post business service
@@ -154,6 +155,36 @@ class PostController extends Controller {
     }
 
     /**
+     * This method is to display featured posts
+     * @param Request $request
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function displayFeaturedPosts(Request $request) {
+        try {
+            $this->logger->info("Entering PostController.displayFeaturedPosts()");
+
+            //call post business service
+            $service = new PostBusinessService();
+            $posts = $service->findFeaturedPosts();
+
+            // echo "<pre>";
+            // print_r($posts);
+            // exit;
+
+            //render a response view
+            return view('home')->with('posts' , $posts);
+
+        }
+
+        catch (Exception $e){
+            //log exception and display exception view
+            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            $data = ['errorMsg' => $e->getMessage()];
+            return view('exception')->with($data);
+        }
+    }
+
+    /**
      * This method is to display all posts from database
      * @param Request $request
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
@@ -261,6 +292,7 @@ class PostController extends Controller {
             $title = $request->input('title');
             $date = $request->input('date');
             $description = $request->input('description');
+            $content = $request->input('content');
             $image = $request->input('image');
 
             if ($request->session()->has('user_id')) {
@@ -268,7 +300,7 @@ class PostController extends Controller {
             }
 
             //create object model and save posted form data in post object model
-            $blogPost = new PostModel($id, $title, $description, $date, $image, $user_id);
+            $blogPost = new PostModel($id, $title, $description, $content, $date, $image, $user_id);
 
             //execute business service and call post business service
             $service = new PostBusinessService();

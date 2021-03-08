@@ -22,15 +22,17 @@ class PostDataService {
             //select variables and see if the row exists
             $title = $post->getTitle();
             $description = $post->getDescription();
+            $content = $post->getContent();
             $date = date('m/d/Y');
             $image = $post->getImage();
             $user_id = $post->getUser_id();
 
             //prepared statements is created
-            $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `date`, `image`, `users_id`) VALUES (:title, :description, :date, :image, :user_id)");
+            $stmt = $this->conn->prepare("INSERT INTO `posts` (`title`, `description`, `content`, `date`, `image`, `users_id`) VALUES (:title, :description, :content, :date, :image, :user_id)");
             //binds parameters
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':content', $content);
             $stmt->bindParam(':date', $date);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':user_id', $user_id);
@@ -64,7 +66,7 @@ class PostDataService {
         Log::info("Entering PostDataService.findPostByName()");
         try{
             //prepared statement is created
-            $stmt = $this->conn->prepare("SELECT id, title, description, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
+            $stmt = $this->conn->prepare("SELECT id, title, description, content, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
 
             //array is created and statement is executed
             $list = array();
@@ -73,7 +75,7 @@ class PostDataService {
             //loops through table  using stmt->fetch
             for ($i = 0; $row = $stmt->fetch(); $i++) {
                 //post model is created
-                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
+                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
                 //inserts variables into end of array
                 array_push($list, $postSearch);
             }
@@ -175,7 +177,7 @@ class PostDataService {
             //loops through table  using stmt->fetch
             for ($i = 0; $row = $stmt->fetch(); $i++) {
                 //post model is created
-                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['date'], $row['image'], $id);
+                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $id);
                 //inserts variables into end of array
                 array_push($list, $postSearch);
             }
@@ -210,13 +212,47 @@ class PostDataService {
             //loops through table  using stmt->fetch
             for ($i = 0; $row = $stmt->fetch(); $i++) {
                 //post model is created
-                $postSearch = new PostModel($id, $row['title'], $row['description'], $row['date'], $row['image'], $row['users_id']);
+                $postSearch = new PostModel($id, $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
                 //inserts variables into end of array
                 array_push($list, $postSearch);
             }
             //return list array that holds job variables
             Log::info("Exiting PostDataService.findPostByID() with true");
             return $list;
+        }
+
+        catch (PDOException $e){
+            //log and throw custom exception
+            Log::error("Exception: ", array("message" => $e->getMessage()));
+            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
+        }
+    }
+
+/**
+     * Finds the posts that are featured on home page
+     * @param  $id
+     * @return array
+     */
+    public function findFeaturedPosts() {
+        Log::info("Entering PostDataService.findFeaturedPosts()");
+        try{
+            //prepared statement is created and user id is binded
+            $stmt = $this->conn->prepare('SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id LIMIT 3');
+
+            //list array is created and statement is executed
+            // $list = array();
+            $stmt->execute();
+            $users = $stmt->fetchAll();
+            //loops through table  using stmt->fetch
+            // for ($i = 0; $row = $stmt->fetch(); $i++) {
+            //     //post model is created
+            //     $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
+            //     //inserts variables into end of array
+            //     array_push($list, $postSearch);
+            // }
+            //return list array that holds job variables
+            Log::info("Exiting PostDataService.findFeaturedPosts() with true");
+            return $users;
         }
 
         catch (PDOException $e){

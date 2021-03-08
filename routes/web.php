@@ -13,9 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('home');
-});
+// Route::get('/home', function () {
+//     return view('home');
+// });
+/*Fetches the get parameters of all blog posts*/
+Route::get('/home', 'App\Http\Controllers\PostController@displayFeaturedPosts');
 
 /* LOGIN */
 

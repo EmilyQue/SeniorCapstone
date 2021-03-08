@@ -55,7 +55,8 @@ class LoginController extends Controller {
                 $request->session()->put('role', $user_id);
                 $request->session()->put('active', $user_id);
 
-                return redirect('home');
+                // return redirect('home');
+                return redirect()->action('App\Http\Controllers\PostController@displayFeaturedPosts');
             }
 
             else {

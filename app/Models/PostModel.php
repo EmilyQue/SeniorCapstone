@@ -6,14 +6,16 @@ class PostModel {
     private $id;
     private $title;
     private $description;
+    private $content;
     private $date;
     private $image;
     private $user_id;
 
-    public function __construct($id, $title, $description, $date, $image, $user_id) {
+    public function __construct($id, $title, $description, $content, $date, $image, $user_id) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
+        $this->content = $content;
         $this->date = $date;
         $this->image = $image;
         $this->user_id = $user_id;
@@ -41,6 +43,14 @@ class PostModel {
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getContent()
+    {
+        return $this->content;
     }
 
     /**
@@ -89,6 +99,14 @@ class PostModel {
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @param mixed $content
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
     }
 
     /**
