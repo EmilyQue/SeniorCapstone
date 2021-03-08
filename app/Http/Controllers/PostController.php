@@ -221,14 +221,14 @@ class PostController extends Controller {
             $this->logger->info("Entering PostController.deleteBlogPost()");
 
             //GET method for post id
-            $id = $request->session()->get('user_id');
+            $id = $_GET['id'];
             //call user business service
             $service = new PostBusinessService();
             $delete = $service->removeBlogPost($id);
 
             //render a success or fail view
             if($delete) {
-                return view('displayPosts');
+                return redirect()->action('App\Http\Controllers\PostController@displayUserPosts');
             }
 
             else {

@@ -65,6 +65,9 @@ Route::post('/updateProfile', 'App\Http\Controllers\ProfileController@updateProf
 /*Fetches post parameters of updated user recent travel info*/
 Route::post('/addRecentTravel', 'App\Http\Controllers\ProfileController@addRecentTravel');
 
+/*Fetches the get parameters of deletePost method in Profile controller*/
+Route::get('/deletePost', 'App\Http\Controllers\ProfileController@deleteBlogPost');
+
 /* BLOG POSTS */
 
 /*Route is mapped to the '/addPost' URI and will return the addPost view */

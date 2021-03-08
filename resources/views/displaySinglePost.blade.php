@@ -5,12 +5,15 @@
 
 <div class="profile-content">
     <div class="shadow-box">
-        <a href="javascript:history.back()" style="color: black!important; padding-bottom: 150px!important">Go Back</a>
+        @if(count($posts) != 0)
+                @foreach($posts as $c)
+                <a href="javascript:history.back()" style="color: black!important; padding-bottom: 150px!important; text-decoration: underline"><< Go Back</a>
+
+        <form action='deletePost'><input type='hidden' name='id' value="{{$c->getID()}}"><button class="btn btn-danger" type='submit' onclick="return confirm('Are you sure?')" style="float: right"><i class="fa fa-trash"></i></button></form>
 
         <div class="container">
             <div class="row">
-            @if(count($posts) != 0)
-                @foreach($posts as $c)
+
                     <div class="card-body">
                         <h2>{{$c->getTitle()}}</h2>
                       <p class="card-text"><small class="text-muted">By: {{$username}} | Posted on {{$c->getDate()}}</small></p>
