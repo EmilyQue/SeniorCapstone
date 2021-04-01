@@ -19,21 +19,11 @@
 
     <style>
         body{
-            background: #E8DFE0;
-        }
-
-        .section{
-            background: white;
-            width: 80%;
-            padding: 20px 0;
-            margin: 0 auto;
+            background-color: #E8DFE0;
         }
     </style>
 
     <body>
-        <div class="section">
-            @include('layouts.header')
-            @yield('content')
-        <div>
+        @yield('form')
     </body>
 </html>

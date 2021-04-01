@@ -4,9 +4,7 @@
 @section('content')
 
 <div class="profile-content">
-    <div class="shadow-box">
-        <h1 style="color: #f08700; text-align: center">My Posts</h1>
-
+        <h1 class="text-center">My Posts <a href="addPost"><i class="fas fa-plus"></i></a></h1>
         <div class="container">
             <div class="row">
             @if(count($posts) != 0)
@@ -32,6 +30,5 @@
             @endif
             </div>
         </div>
-    </div>
 </div>
 @endsection

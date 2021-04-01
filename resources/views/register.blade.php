@@ -1,10 +1,11 @@
-@extends('layouts.appmaster')
+@extends('layouts.loginmaster')
 @section('title', 'Register Page')
 
-@section('content')
+@section('form')
     <div class="register-form">
         <form action="register" method="POST">
-            <h2 class="text-center">Register</h2>
+            <h1 class="text-center">ADVENTR</h1>
+            <h4 class="text-center">A COMMUNITY TRAVEL GUIDE</h4>
             <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
             <div class="form-group">
                 <input type="text" class="form-control" name="firstName" placeholder="First Name" required="required" value="{{ old("firstName") }}">
@@ -24,8 +25,9 @@
                 <input type="password" class="form-control" name="password" placeholder="Password" required="required">
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" class="btn btn-block">Submit</button>
             </div>
+            <h6 class="text-center">Already have an account? Login <a href="login">here</a></h6>
         </form>
     </div>
 

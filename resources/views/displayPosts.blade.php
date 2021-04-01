@@ -1,84 +1,32 @@
-<?php session_start();
-use App\Services\Business\PostBusinessService;
-?>
 @extends('layouts.appmaster')
-@section('title', 'Blog Posts Page')
+@section('title', 'Explore Page')
 
 @section('content')
 
-<head>
-<style>
-h1{
-    margin-top: 25px;
-    text-align: center;
-}
-.alert{
-    margin-top: 25px;
-}
-#post {
-    font-family: "Comic Sans", Arial, Helvetica, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 25px;
-}
-#post td, #post th {
-    border: 1px solid #ddd;
-    padding: 8px;
-}
-#post tr:nth-child(even) {
-    background-color: #f2f2f2;
-}
-#post tr:hover {
-    background-color: #ddd;
-}
-#post th {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    text-align: left;
-    background-color: #f08700;
-    color: white;
-}
-#post thead {
-    background-color: #aabd8c;
-}
-</style>
+<div class="explore-content">
+        <h1 class="text-center">All Posts</h1>
 
-</head>
-<table id="post">
-<thead>
-    <th>Edit</th>
-    <th>Delete</th>
-	<th>Id</th>
-	<th>Blog Title</th>
-	<th>Blog Description</th>
-    <th>Author</th>
-</thead>
-<tbody>
-
-<h1>All Posts</h1>
-
-    @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-
-<?php
-//post business service is called
-$bs = new PostBusinessService();
-$posts = $bs->findAllBlogPosts();
-//for loop to populate the data table in the displayPosts view
-for ($x = 0; $x < count($posts); $x++) {
-    echo "<tr>";
-    echo "<td><form action='editPost'><input type='hidden' name='id' value=". $posts[$x]['id'] ."><input type='submit' value='Edit'></form>  </td>";
-    echo "<td><form action='deletePost'><input type='hidden' name='id' value=". $posts[$x]['id'] ."><input type='submit' value='Delete'></form>  </td>";
-    echo "<td>" . $posts[$x]['id'] . "</td>";
-    echo "<td>" . $posts[$x]['title'] . "</td>";
-    echo "<td>" . $posts[$x]['description'] . "</td>";
-    echo "<td>" . $posts[$x]['users_id'] . "</td>";
-    }
-?>
-</table>
-<!-- //loops through person array and prints values -->
-
+        <div class="container">
+            <div class="row">
+            @if(!empty($posts))
+                @foreach($posts as $c)
+                <div class="col-md-4">
+                    <div class="card-content">
+                        <div class="card-img">
+                            <img src="images/{{$c['image']}}" alt="">
+                        </div>
+                        <div class="card-desc">
+                            <h5 class="text-center">{{$c['title']}}</h5>
+                            <p class="text-center"><small><i>by</i> {{$c['firstName']}} {{$c['lastName']}} <i>on</i> {{$c['date']}}</small></p>
+                            <p>{{$c['description']}}</p>
+                            <form action='displaySinglePost'><input type='hidden' name='id' value={{$c['id']}}><input class="btn" type='submit' value='Go To Post'></form>
+                            {{-- <a href="displaySinglePost" class="btn-card">Go to Post</a> --}}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @endif
+            </div>
+        </div>
+</div>
 @endsection

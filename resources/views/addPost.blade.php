@@ -3,9 +3,9 @@
 
 @section('content')
 
-    <div class="register-form">
+    <div class="add-form">
         <form action="addPost" method="POST">
-            <h1 class="text-center" style="color: #f08700">Add Post</h1>
+            <h1 class="text-center">Add Post</h1>
 
             <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
             <div class="form-group">
@@ -28,7 +28,8 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                <button type="submit" class="btn btn-block">Submit</button>
+                <button type="submit" class="btn btn-block" onclick="history.back();">Cancel</button>
             </div>
         </form>
     </div>

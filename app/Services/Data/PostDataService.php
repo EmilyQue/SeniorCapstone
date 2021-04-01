@@ -99,7 +99,7 @@ class PostDataService {
         AppLogger::info("Entering PostDataService.findAllPosts()");
         try{
             //prepared statement is created to display posts
-            $stmt = $this->conn->prepare('SELECT * from posts');
+            $stmt = $this->conn->prepare('SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id');
             //executes prepared query
             $stmt->execute();
 

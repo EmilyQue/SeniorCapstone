@@ -4,12 +4,13 @@
 @section('content')
 
 <div class="profile-content">
-    <div class="shadow-box">
         @if(count($posts) != 0)
                 @foreach($posts as $c)
                 <a href="javascript:history.back()" style="color: black!important; padding-bottom: 150px!important; text-decoration: underline"><< Go Back</a>
 
-        <form action='deletePost'><input type='hidden' name='id' value="{{$c->getID()}}"><button class="btn btn-danger" type='submit' onclick="return confirm('Are you sure?')" style="float: right"><i class="fa fa-trash"></i></button></form>
+                @if(session('user_id') == $c->getUser_id())
+                <form action='deletePost'><input type='hidden' name='id' value="{{$c->getID()}}"><button class="btn btn-danger" type='submit' onclick="return confirm('Are you sure?')" style="float: right"><i class="fa fa-trash"></i></button></form>
+            @endif
 
         <div class="container">
             <div class="row">
@@ -28,6 +29,5 @@
             @endif
             </div>
         </div>
-    </div>
 </div>
 @endsection

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PostModel;
 use App\Services\Business\PostBusinessService;
-use Illuminate\Support\Facades\Log;
 use App\Services\Utility\AppLogger;
 use Exception;
+use DB;
 
 class PostController extends Controller {
     //add a post
@@ -186,7 +186,7 @@ class PostController extends Controller {
 
             //render a response view
             if ($posts) {
-                return view('displayPosts')->with($posts);
+                return view('displayPosts')->with('posts', $posts);
             }
         }
 
@@ -310,5 +310,9 @@ class PostController extends Controller {
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
+    }
+
+    public function pagination(){
+
     }
 }
