@@ -10,17 +10,9 @@ use Exception;
 use App\Models\CredentialsModel;
 use App\Services\Business\UserBusinessService;
 use Illuminate\Support\Facades\Log;
-use App\Services\Utility\ILoggerService;
+use App\Services\Utility\AppLogger;
 
 class LoginController extends Controller {
-    /**
-     * Uses the logger service to log any messages
-     * @param ILoggerService $logger
-     */
-    public function __construct(ILoggerService $logger) {
-        $this->logger = $logger;
-     }
-
     /**
      * This method authenticates the user's credentials
      * @param Request $request
@@ -28,8 +20,9 @@ class LoginController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function index(Request $request) {
+        AppLogger::info("Entering LoginController.index()");
+
         try{
-            $this->logger->info("Entering LoginController.index()");
             //1. process form data
             //get posted form data
             $username = $request->input('username');
@@ -67,7 +60,7 @@ class LoginController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -79,6 +72,8 @@ class LoginController extends Controller {
      * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function logout(Request $request) {
+        AppLogger::info("Entering LoginController.logout()");
+
         try {
             //$request->session()->forget('user_id');
             $request->session()->flush();
@@ -88,7 +83,7 @@ class LoginController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }

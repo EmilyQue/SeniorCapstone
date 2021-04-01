@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Services\Business\AdminBusinessService;
-use App\Services\Utility\MyLogger;
+use App\Services\Utility\AppLogger;
 use Exception;
 use App\Models\DTO;
-use Illuminate\Http\Request;
 
 class UsersRestController extends Controller
 {
@@ -15,8 +14,9 @@ class UsersRestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+        AppLogger::info("Entering UsersRestController.index()");
+
         try {
             //call service to get all users
             $service = new AdminBusinessService();
@@ -39,7 +39,7 @@ class UsersRestController extends Controller
 
         catch (Exception $e1) {
             //log exception
-            MyLogger::error("Exception: ", array("message" => $e1->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e1->getMessage()));
 
             //return an error back to the user in the dto
             $dto = new DTO(-2, $e1->getMessage(), "");

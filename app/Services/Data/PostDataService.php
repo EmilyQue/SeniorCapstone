@@ -3,7 +3,7 @@ namespace App\Services\Data;
 
 use App\Models\PostModel;
 use PDO;
-use Illuminate\Support\Facades\Log;
+use App\Services\Utility\AppLogger;
 use App\Services\Utility\DatabaseException;
 use PDOException;
 
@@ -17,7 +17,7 @@ class PostDataService {
 
     // Method to add post to database
     public function createPost(PostModel $post) {
-        Log::info("Entering PostDataService.createPost()");
+        AppLogger::info("Entering PostDataService.createPost()");
         try{
             //select variables and see if the row exists
             $title = $post->getTitle();
@@ -40,19 +40,19 @@ class PostDataService {
             /*see if post was added
             else return false if not found*/
             if ($stmt->execute()) {
-                Log::info("Exit PostDataService.createPost() with true");
+                AppLogger::info("Exit PostDataService.createPost() with true");
                 return true;
             }
 
             else {
-                Log::info("Exit PostDataService.createPost() with false");
+                AppLogger::info("Exit PostDataService.createPost() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -63,7 +63,7 @@ class PostDataService {
      * @return array
      */
     public function findPostByName($post) {
-        Log::info("Entering PostDataService.findPostByName()");
+        AppLogger::info("Entering PostDataService.findPostByName()");
         try{
             //prepared statement is created
             $stmt = $this->conn->prepare("SELECT id, title, description, content, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
@@ -80,13 +80,13 @@ class PostDataService {
                 array_push($list, $postSearch);
             }
             //return list array that holds post variables
-            Log::info("Exit PostDataService.findPostByName() with true");
+            AppLogger::info("Exit PostDataService.findPostByName() with true");
             return $list;
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -96,7 +96,7 @@ class PostDataService {
      * @return array
      */
     public function findAllPosts() {
-        Log::info("Entering PostDataService.findAllPosts()");
+        AppLogger::info("Entering PostDataService.findAllPosts()");
         try{
             //prepared statement is created to display posts
             $stmt = $this->conn->prepare('SELECT * from posts');
@@ -113,14 +113,14 @@ class PostDataService {
                 }
 
                 //return post array
-                Log::info("Exiting PostDataService.findAllPosts() with true");
+                AppLogger::info("Exiting PostDataService.findAllPosts() with true");
                 return $postArray;
             }
         }
 
         catch(PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -131,7 +131,7 @@ class PostDataService {
      * @return boolean
      */
     public function deletePost($id) {
-        Log::info("Entering PostDataService.deletePost()");
+        AppLogger::info("Entering PostDataService.deletePost()");
         try{
             //prepared statement is created
             $stmt = $this->conn->prepare('DELETE FROM posts WHERE `id` = :id');
@@ -142,19 +142,19 @@ class PostDataService {
 
             //returns true or false if post has been deleted from database
             if ($delete) {
-                Log::info("Exiting PostDataService.deletePost() with true");
+                AppLogger::info("Exiting PostDataService.deletePost() with true");
                 return true;
             }
 
             else {
-                Log::info("Exiting PostDataService.deletePost() with false");
+                AppLogger::info("Exiting PostDataService.deletePost() with false");
                 return false;
             }
         }
 
         catch (PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -165,7 +165,7 @@ class PostDataService {
      * @return array
      */
     public function findPostByUserID($id) {
-        Log::info("Entering PostDataService.findPostByUserID()");
+        AppLogger::info("Entering PostDataService.findPostByUserID()");
         try{
             //prepared statement is created and user id is binded
             $stmt = $this->conn->prepare('SELECT * FROM posts WHERE users_id = :id');
@@ -183,13 +183,13 @@ class PostDataService {
                 array_push($list, $postSearch);
             }
             //return list array that holds job variables
-            Log::info("Exiting PostDataService.findPostByUserID() with true");
+            AppLogger::info("Exiting PostDataService.findPostByUserID() with true");
             return $list;
         }
 
         catch (PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -200,7 +200,7 @@ class PostDataService {
      * @return array
      */
     public function findPostByID($id) {
-        Log::info("Entering PostDataService.findPostByUserID()");
+        AppLogger::info("Entering PostDataService.findPostByUserID()");
         try{
             //prepared statement is created and user id is binded
             $stmt = $this->conn->prepare('SELECT * FROM posts WHERE id = :id');
@@ -219,13 +219,13 @@ class PostDataService {
             }
 
             //return list array that holds job variables
-            Log::info("Exiting PostDataService.findPostByID() with true");
+            AppLogger::info("Exiting PostDataService.findPostByID() with true");
             return $list;
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -236,7 +236,7 @@ class PostDataService {
      * @return array
      */
     public function findFeaturedPosts() {
-        Log::info("Entering PostDataService.findFeaturedPosts()");
+        AppLogger::info("Entering PostDataService.findFeaturedPosts()");
         try{
             //prepared statement is created and user id is binded
             $stmt = $this->conn->prepare('SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id LIMIT 3');
@@ -253,13 +253,13 @@ class PostDataService {
             //     array_push($list, $postSearch);
             // }
             //return list array that holds job variables
-            Log::info("Exiting PostDataService.findFeaturedPosts() with true");
+            AppLogger::info("Exiting PostDataService.findFeaturedPosts() with true");
             return $users;
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -270,7 +270,7 @@ class PostDataService {
      * @return boolean
      */
     public function updatePost(PostModel $post) {
-        Log::info("Entering PostDataService.updatePost()");
+        AppLogger::info("Entering PostDataService.updatePost()");
         try{
             // select variables and see if the row exists
             $id = $post->getId();
@@ -290,19 +290,19 @@ class PostDataService {
                 * else return false
                 */
             if ($stmt->rowCount() == 1) {
-                Log::info("Exiting PostDataService.updatePost() with true");
+                AppLogger::info("Exiting PostDataService.updatePost() with true");
                 return true;
             }
 
             else {
-                Log::info("Exiting PostDataService.updatePost() with false");
+                AppLogger::info("Exiting PostDataService.updatePost() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }

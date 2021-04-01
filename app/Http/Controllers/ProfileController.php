@@ -8,18 +8,9 @@ use Exception;
 use App\Models\ProfileModel;
 use App\Models\UserTravelModel;
 use App\Services\Business\ProfileBusinessService;
-use Illuminate\Support\Facades\Log;
-use App\Services\Utility\ILoggerService;
+use App\Services\Utility\AppLogger;
 
 class ProfileController extends Controller {
-    /**
-     * Uses the logger service to log any messages
-     * @param ILoggerService $logger
-     */
-    public function __construct(ILoggerService $logger) {
-        $this->logger = $logger;
-     }
-
     /**
      * This method creates user profile
      * @param Request $request
@@ -28,7 +19,7 @@ class ProfileController extends Controller {
      */
     public function index(Request $request) {
         try{
-            $this->logger->info("Entering ProfileController.index()");
+            AppLogger::info("Entering ProfileController.index()");
 
             //recieves data inputed from user
             $name = $request->input('name');
@@ -61,7 +52,7 @@ class ProfileController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -73,9 +64,9 @@ class ProfileController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function displayUserProfile(Request $request) {
-        try{
-            $this->logger->info("Entering ProfileController.displayUserProfile()");
+        AppLogger::info("Entering ProfileController.displayUserProfile()");
 
+        try{
             //get session user id and username
             $id = session()->get('user_id');
             $username = session()->get('username');
@@ -91,7 +82,7 @@ class ProfileController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -102,8 +93,9 @@ class ProfileController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|boolean
      */
     public function findProfile() {
+        AppLogger::info("Entering ProfileController.findProfile()");
+
         try {
-            $this->logger->info("Entering ProfileController.findProfile()");
             //get posted form data
             $id = session()->get('user_id');
 
@@ -124,9 +116,8 @@ class ProfileController extends Controller {
         }
 
         catch (Exception $e){
-            //best practice: call all exceptions, log the exception, and display a common error page (or use a global exception handler)
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -139,9 +130,9 @@ class ProfileController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateProfileInfo(Request $request) {
-        try {
-            $this->logger->info("Entering ProfileController.updateProfileInfo()");
+        AppLogger::info("Entering ProfileController.updateProfileInfo()");
 
+        try {
             //get posted form data
             $id = $request->input('id');
             $name = $request->input('name');
@@ -172,16 +163,12 @@ class ProfileController extends Controller {
         }
 
         catch (ValidationException $e1) {
-            //note: this exception must be caught before exception bc validationexception extends from exception
-            //must rethrow this exception in order for laravel to display your submitted page with errors
-            //catch and rethrow data validation exception (so we can catch all others in our next exception catch block
             throw $e1;
         }
 
         catch (Exception $e){
-            //best practice: call all exceptions, log the exception, and display a common error page (or use a global exception handler)
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -194,9 +181,9 @@ class ProfileController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function addRecentTravel(Request $request) {
-        try{
-            $this->logger->info("Entering ProfileController.addRecentTravel()");
+        AppLogger::info("Entering ProfileController.addRecentTravel()");
 
+        try{
             //recieves data inputed from user
             $destination = $request->input('destination');
             $departure = $request->input('departure_date');
@@ -230,7 +217,7 @@ class ProfileController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }

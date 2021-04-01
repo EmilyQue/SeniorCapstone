@@ -6,7 +6,7 @@ use App\Models\ProfileModel;
 use App\Models\UserTravelModel;
 use \PDO;
 use App\Services\Data\ProfileDataService;
-use Illuminate\Support\Facades\Log;
+use App\Services\Utility\AppLogger;
 
 class ProfileBusinessService {
 /**
@@ -15,7 +15,7 @@ class ProfileBusinessService {
      * @return boolean
      */
     public function create(ProfileModel $profile) {
-        Log::info("Entering ProfileBusinessService.create()");
+        AppLogger::info("Entering ProfileBusinessService.create()");
 
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -30,7 +30,7 @@ class ProfileBusinessService {
         $flag = $service->createProfile($profile);
 
         //return the finder results
-        Log::info("Exit ProfileBusinessService.create() with " . $flag);
+        AppLogger::info("Exit ProfileBusinessService.create() with " . $flag);
         return $flag;
     }
 
@@ -40,7 +40,7 @@ class ProfileBusinessService {
      * @return array
      */
     public function findProfileByUserID($id) {
-        Log::info("Entering ProfileBusinessService.findProfileByUserID()");
+        AppLogger::info("Entering ProfileBusinessService.findProfileByUserID()");
 
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
@@ -57,7 +57,7 @@ class ProfileBusinessService {
         $flag = $service->findProfileByUserID($id);
 
         //return the finder results
-        Log::info("Exit ProfileBusinessService.findProfileByUserID() with " . print_r($flag, true));
+        AppLogger::info("Exit ProfileBusinessService.findProfileByUserID() with " . print_r($flag, true));
         return $flag;
     }
 
@@ -68,7 +68,7 @@ class ProfileBusinessService {
      */
     public function editProfileInfo(ProfileModel $profileInfo)
     {
-        Log::info("Entering ProfileBusinessService.editProfileInfo()");
+        AppLogger::info("Entering ProfileBusinessService.editProfileInfo()");
         // get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -81,7 +81,7 @@ class ProfileBusinessService {
         $service = new ProfileDataService($conn);
         $flag = $service->updateProfileInfo($profileInfo);
         // return the finder results
-        Log::info("Exit ProfileBusinessService.editProfileInfo() with " . $flag);
+        AppLogger::info("Exit ProfileBusinessService.editProfileInfo() with " . $flag);
         return $flag;
     }
 
@@ -91,7 +91,7 @@ class ProfileBusinessService {
      * @return boolean
      */
     public function createRecentTravel(UserTravelModel $travel) {
-        Log::info("Entering ProfileBusinessService.create()");
+        AppLogger::info("Entering ProfileBusinessService.create()");
 
         $servername = config("database.connections.mysql.host");
         $dbname = config("database.connections.mysql.database");
@@ -106,7 +106,7 @@ class ProfileBusinessService {
         $flag = $service->createRecentTravel($travel);
 
         //return the finder results
-        Log::info("Exit ProfileBusinessService.create() with " . $flag);
+        AppLogger::info("Exit ProfileBusinessService.create() with " . $flag);
         return $flag;
     }
 
@@ -116,7 +116,7 @@ class ProfileBusinessService {
      * @return array
      */
     public function findTravelByUserID($id) {
-        Log::info("Entering ProfileBusinessService.findTravelByUserID()");
+        AppLogger::info("Entering ProfileBusinessService.findTravelByUserID()");
 
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
@@ -133,7 +133,7 @@ class ProfileBusinessService {
         $flag = $service->findTravelByUserID($id);
 
         //return the finder results
-        Log::info("Exit ProfileBusinessService.findTravelByUserID() with " . print_r($flag, true));
+        AppLogger::info("Exit ProfileBusinessService.findTravelByUserID() with " . print_r($flag, true));
         return $flag;
     }
 

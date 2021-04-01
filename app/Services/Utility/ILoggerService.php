@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Services\Utility;
 
-interface ILoggerService
+interface ILogger
 {
-    public function debug($message, $data=array());
-    public function info($message, $data=array());
-    public function warning($message, $data=array());
-    public static function error($message, $data=array());
+    static function getLogger();
+    public static function debug($message, $data);
+    public static function info($message, $data);
+    public static function warning($message, $data);
+    public static function error($message, $data);
 }

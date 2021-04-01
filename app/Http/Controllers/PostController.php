@@ -5,23 +5,15 @@ use Illuminate\Http\Request;
 use App\Models\PostModel;
 use App\Services\Business\PostBusinessService;
 use Illuminate\Support\Facades\Log;
-use App\Services\Utility\ILoggerService;
+use App\Services\Utility\AppLogger;
 use Exception;
 
 class PostController extends Controller {
-     /**
-     * Uses the logger service to log any messages
-     * @param ILoggerService $logger
-     */
-    public function __construct(ILoggerService $logger) {
-        $this->logger = $logger;
-    }
-
     //add a post
     public function index(Request $request){
-        try{
-            $this->logger->info("Entering PostController.index()");
+        AppLogger::info("Entering PostController.index()");
 
+        try{
             //recieves data inputed from user
             $title = $request->input('title');
             $description = $request->input('description');
@@ -54,7 +46,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -66,9 +58,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|boolean
      */
     public function searchBlogPost(Request $request){
-        try{
-            $this->logger->info("Entering PostController.searchBlogPost()");
+        AppLogger::info("Entering PostController.searchBlogPost()");
 
+        try{
             //1. process form data
             //get posted form data
             $post = $request->input('search');
@@ -89,7 +81,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -101,9 +93,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function displayUserPosts(Request $request) {
-        try{
-            $this->logger->info("Entering PostController.displayUserPosts()");
+        AppLogger::info("Entering PostController.displayUserPosts()");
 
+        try{
             //get session user id and username
             $id = session()->get('user_id');
             $username = session()->get('username');
@@ -118,7 +110,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -130,9 +122,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function displaySinglePost(Request $request) {
-        try {
-            $this->logger->info("Entering PostController.displaySinglePost()");
+        AppLogger::info("Entering PostController.displaySinglePost()");
 
+        try {
             //get session user id and username
             $id = $_GET['id'];
             $username = session()->get('username');
@@ -148,7 +140,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -160,25 +152,20 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function displayFeaturedPosts(Request $request) {
-        try {
-            $this->logger->info("Entering PostController.displayFeaturedPosts()");
+        AppLogger::info("Entering PostController.displayFeaturedPosts()");
 
+        try {
             //call post business service
             $service = new PostBusinessService();
             $posts = $service->findFeaturedPosts();
 
-            // echo "<pre>";
-            // print_r($posts);
-            // exit;
-
             //render a response view
             return view('home')->with('posts' , $posts);
-
         }
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -190,9 +177,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function displayAllPosts(Request $request) {
-        try {
-            $this->logger->info("Entering PostController.displayAllPosts()");
+        AppLogger::info("Entering PostController.displayAllPosts()");
 
+        try {
             //call post business service
             $service = new PostBusinessService();
             $posts = $service->findAllBlogPosts();
@@ -205,7 +192,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -217,9 +204,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
     public function deleteBlogPost(Request $request) {
-        try{
-            $this->logger->info("Entering PostController.deleteBlogPost()");
+        AppLogger::info("Entering PostController.deleteBlogPost()");
 
+        try{
             //GET method for post id
             $id = $_GET['id'];
             //call user business service
@@ -238,7 +225,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -249,9 +236,9 @@ class PostController extends Controller {
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory|boolean
      */
     public function findUserPosts() {
-        try{
-            $this->logger->info("Entering PostController.findUserPosts()");
+        AppLogger::info("Entering PostController.findUserPosts()");
 
+        try{
             //get posted form data
             $id = session()->get('user_id');
 
@@ -272,7 +259,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
@@ -284,9 +271,9 @@ class PostController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function updateBlogPost(Request $request) {
-        try{
-            $this->logger->info("Entering PostController.updateBlogPost()");
+        AppLogger::info("Entering PostController.updateBlogPost()");
 
+        try{
             //get posted form data
             $id = $request->input('id');
             $title = $request->input('title');
@@ -319,7 +306,7 @@ class PostController extends Controller {
 
         catch (Exception $e){
             //log exception and display exception view
-            $this->logger->error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }

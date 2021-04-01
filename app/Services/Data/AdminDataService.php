@@ -4,7 +4,7 @@ namespace App\Services\Data;
 use PDO;
 use App\Services\Utility\DatabaseException;
 use PDOException;
-use Illuminate\Support\Facades\Log;
+use App\Services\Utility\AppLogger;
 
 //Database interacts with the data from the User class
 class AdminDataService {
@@ -19,7 +19,7 @@ class AdminDataService {
      * @return array
      */
     public function findAllUsers() {
-        Log::info("Entering AdminDataService.findAllUsers()");
+        AppLogger::info("Entering AdminDataService.findAllUsers()");
         try{
             //prepared statement is created to display users
             $stmt = $this->conn->prepare('SELECT * from users');
@@ -35,14 +35,14 @@ class AdminDataService {
                     array_push($userArray, $user);
                 }
                 //return user array
-                Log::info("Exiting AdminDataService.findAllUsers() with true");
+                AppLogger::info("Exiting AdminDataService.findAllUsers() with true");
                 return $userArray;
             }
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -53,7 +53,7 @@ class AdminDataService {
      * @return boolean
      */
     public function suspendUser($id) {
-        Log::info("Entering AdminDataService.suspendUser()");
+        AppLogger::info("Entering AdminDataService.suspendUser()");
         try{
             //prepared statement is created
             $stmt = $this->conn->prepare("UPDATE users SET `active` = '1' WHERE `id` = :id");
@@ -64,19 +64,19 @@ class AdminDataService {
 
             //returns true or false if user active row has been set to 1
             if ($suspend) {
-                Log::info("Exiting AdminDataService.suspendUser() with true");
+                AppLogger::info("Exiting AdminDataService.suspendUser() with true");
                 return true;
             }
 
             else {
-                Log::info("Exiting AdminDataService.suspendUser() with false");
+                AppLogger::info("Exiting AdminDataService.suspendUser() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
            //log and throw custom exception
-           Log::error("Exception: ", array("message" => $e->getMessage()));
+           AppLogger::error("Exception: ", array("message" => $e->getMessage()));
            throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -87,7 +87,7 @@ class AdminDataService {
      * @return boolean
      */
     public function unsuspendUser($id) {
-        Log::info("Entering AdminDataService.unsuspendUser()");
+        AppLogger::info("Entering AdminDataService.unsuspendUser()");
         try{
             //prepared statement is created
             $stmt = $this->conn->prepare("UPDATE users SET `active` = '0' WHERE `id` = :id");
@@ -98,19 +98,19 @@ class AdminDataService {
 
             //returns true or false if user active row has been set to 0
             if ($unsuspend) {
-                Log::info("Exiting AdminDataService.unsuspendUser() with false");
+                AppLogger::info("Exiting AdminDataService.unsuspendUser() with true");
                 return true;
             }
 
             else {
-                Log::info("Exiting AdminDataService.unsuspendUser() with false");
+                AppLogger::info("Exiting AdminDataService.unsuspendUser() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }

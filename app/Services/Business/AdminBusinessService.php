@@ -4,8 +4,7 @@ namespace App\Services\Business;
 
 use \PDO;
 use App\Services\Data\AdminDataService;
-use Illuminate\Support\Facades\Log;
-
+use App\Services\Utility\AppLogger;
 class AdminBusinessService {
     /**
      * Suspend user
@@ -13,7 +12,7 @@ class AdminBusinessService {
      * @return boolean
      */
     public function suspendUser($id) {
-        Log::info("Entering AdminBusinessService.suspendUser()");
+        AppLogger::info("Entering AdminBusinessService.suspendUser()");
 
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
@@ -30,7 +29,7 @@ class AdminBusinessService {
         $flag = $service->suspendUser($id);
 
         //return the finder results
-        Log::info("Exit AdminBusinessService.suspendUser() with " . $flag);
+        AppLogger::info("Exit AdminBusinessService.suspendUser() with " . $flag);
         return $flag;
     }
 
@@ -40,7 +39,7 @@ class AdminBusinessService {
      * @return boolean
      */
     public function unsuspendUser($id) {
-        Log::info("Entering AdminBusinessService.unsuspendUser()");
+        AppLogger::info("Entering AdminBusinessService.unsuspendUser()");
 
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
@@ -57,7 +56,7 @@ class AdminBusinessService {
         $flag = $service->unsuspendUser($id);
 
         //return the finder results
-        Log::info("Exit AdminBusinessService.unsuspendUser() with " . $flag);
+        AppLogger::info("Exit AdminBusinessService.unsuspendUser() with " . $flag);
         return $flag;
     }
 
@@ -66,7 +65,7 @@ class AdminBusinessService {
      * @return array
      */
     public function showUsers() {
-        Log::info("Entering AdminBusinessService.showUsers()");
+        AppLogger::info("Entering AdminBusinessService.showUsers()");
 
         //get credentials for accessing the database
         $servername = config("database.connections.mysql.host");
@@ -85,7 +84,7 @@ class AdminBusinessService {
         $flag = $service->findAllUsers();
 
         //return the finder results
-        Log::info("Exit AdminBusinessService.showUsers() with " . print_r($flag, true));
+        AppLogger::info("Exit AdminBusinessService.showUsers() with " . print_r($flag, true));
         return $flag;
     }
 }

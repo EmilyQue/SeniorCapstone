@@ -4,7 +4,7 @@ namespace App\Services\Data;
 use PDO;
 use App\Models\ProfileModel;
 use App\Models\UserTravelModel;
-use Illuminate\Support\Facades\Log;
+use App\Services\Utility\AppLogger;
 use App\Services\Utility\DatabaseException;
 use PDOException;
 
@@ -18,7 +18,7 @@ class ProfileDataService {
 
     // Method to add user to database
     public function createProfile(ProfileModel $profile) {
-        Log::info("Entering ProfileDataService.createProfile()");
+        AppLogger::info("Entering ProfileDataService.createProfile()");
 
         try{
             //select variables and see if the row exists
@@ -39,19 +39,19 @@ class ProfileDataService {
             /*see if user existed and return true if found
             else return false if not found*/
             if ($stmt->execute()) {
-                Log::info("Exit ProfileDataService.createProfile() with true");
+                AppLogger::info("Exit ProfileDataService.createProfile() with true");
                 return true;
             }
 
             else {
-                Log::info("Exit ProfileDataService.createProfile() with false");
+                AppLogger::info("Exit ProfileDataService.createProfile() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log exception and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -62,7 +62,7 @@ class ProfileDataService {
      * @return array
      */
     public function findProfileByUserID($id) {
-        Log::info("Entering ProfileDataService.findProfileByUserID()");
+        AppLogger::info("Entering ProfileDataService.findProfileByUserID()");
         try{
             //prepared statement is created and user id is binded
             $stmt = $this->conn->prepare('SELECT * FROM profile WHERE users_id = :id');
@@ -80,13 +80,13 @@ class ProfileDataService {
                 array_push($list, $profileSearch);
             }
             //return list array that holds job variables
-            Log::info("Exiting ProfileDataService.findProfileByUserID() with true");
+            AppLogger::info("Exiting ProfileDataService.findProfileByUserID() with true");
             return $list;
         }
 
         catch (PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -99,7 +99,7 @@ class ProfileDataService {
      */
     public function updateProfileInfo(ProfileModel $profileInfo)
     {
-        Log::info("Entering ProfileDataService.updateProfileInfo()");
+        AppLogger::info("Entering ProfileDataService.updateProfileInfo()");
         try {
             // select variables and see if the row exists
             $id = $profileInfo->getId();
@@ -121,15 +121,15 @@ class ProfileDataService {
              * else return false if unsuccessful
              */
             if ($stmt->rowCount() == 1) {
-                Log::info("Exit ProfileDataService.updateProfileInfo() with true");
+                AppLogger::info("Exit ProfileDataService.updateProfileInfo() with true");
                 return true;
             } else {
-                Log::info("Exit ProfileDataService.updateProfileInfo() with false");
+                AppLogger::info("Exit ProfileDataService.updateProfileInfo() with false");
                 return false;
             }
         } catch (PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array(
+            AppLogger::error("Exception: ", array(
                 "message" => $e->getMessage()
             ));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
@@ -138,7 +138,7 @@ class ProfileDataService {
 
     // Method to add recent travels
     public function createRecentTravel(UserTravelModel $travel) {
-        Log::info("Entering ProfileDataService.createRecentTravel()");
+        AppLogger::info("Entering ProfileDataService.createRecentTravel()");
 
         try{
             //select variables and see if the row exists
@@ -160,19 +160,19 @@ class ProfileDataService {
             /*see if user existed and return true if found
             else return false if not found*/
             if ($stmt->execute()) {
-                Log::info("Exit ProfileDataService.createRecentTravel() with true");
+                AppLogger::info("Exit ProfileDataService.createRecentTravel() with true");
                 return true;
             }
 
             else {
-                Log::info("Exit ProfileDataService.createRecentTravel() with false");
+                AppLogger::info("Exit ProfileDataService.createRecentTravel() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log exception and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -183,7 +183,7 @@ class ProfileDataService {
      * @return array
      */
     public function findTravelByUserID($id) {
-        Log::info("Entering ProfileDataService.findTravelByUserID()");
+        AppLogger::info("Entering ProfileDataService.findTravelByUserID()");
         try{
             //prepared statement is created and user id is binded
             $stmt = $this->conn->prepare('SELECT * FROM recent_travels WHERE users_id = :id');
@@ -201,13 +201,13 @@ class ProfileDataService {
                 array_push($list, $travelSearch);
             }
             //return list array that holds job variables
-            Log::info("Exiting ProfileDataService.findTravelByUserID() with true");
+            AppLogger::info("Exiting ProfileDataService.findTravelByUserID() with true");
             return $list;
         }
 
         catch (PDOException $e) {
             //log and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }

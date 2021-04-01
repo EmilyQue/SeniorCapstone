@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Services\Business\AdminBusinessService;
-use App\Services\Utility\MyLogger;
+use App\Services\Utility\AppLogger;
 use Exception;
 use App\Models\DTO;
 use App\Services\Business\PostBusinessService;
-use Illuminate\Http\Request;
 
 class PostsRestController extends Controller
 {
@@ -16,8 +15,9 @@ class PostsRestController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
+        AppLogger::info("Entering PostsRestController.index()");
+
         try {
             //call service to get all posts
             $service = new PostBusinessService();
@@ -38,7 +38,7 @@ class PostsRestController extends Controller
 
         catch (Exception $e1) {
             //log exception
-            MyLogger::error("Exception: ", array("message" => $e1->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e1->getMessage()));
 
             //return an error back to the user in the dto
             $dto = new DTO(-2, $e1->getMessage(), "");

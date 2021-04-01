@@ -4,7 +4,7 @@ namespace App\Services\Data;
 use PDO;
 use App\Models\CredentialsModel;
 use App\Models\UserModel;
-use Illuminate\Support\Facades\Log;
+use App\Services\Utility\AppLogger;
 use App\Services\Utility\DatabaseException;
 use PDOException;
 
@@ -18,7 +18,7 @@ class UserDataService {
 
     // Method to add user to database
     public function createUser(UserModel $user) {
-        Log::info("Entering UserDataService.createUser()");
+        AppLogger::info("Entering UserDataService.createUser()");
 
         try{
             //select variables and see if the row exists
@@ -44,19 +44,19 @@ class UserDataService {
             /*see if user existed and return true if found
             else return false if not found*/
             if ($stmt->execute() >= 1) {
-                Log::info("Exit UserDataService.createUser() with true");
+                AppLogger::info("Exit UserDataService.createUser() with true");
                 return true;
             }
 
             else {
-                Log::info("Exit UserDataService.createUser() with false");
+                AppLogger::info("Exit UserDataService.createUser() with false");
                 return false;
             }
         }
 
         catch (PDOException $e){
             //log exception and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
@@ -67,7 +67,7 @@ class UserDataService {
      * @return NULL
      */
     public function findByUser(CredentialsModel $user) {
-        Log::info("Entering UserDataService.findByUser()");
+        AppLogger::info("Entering UserDataService.findByUser()");
 
         try{
             //select username and password and see if the row exists
@@ -86,19 +86,19 @@ class UserDataService {
                 else return false if not found*/
             if ($stmt->rowCount() == 1) {
                 $user = $stmt->fetch(\PDO::FETCH_ASSOC);
-                Log::info("Exit UserDataService.findByUser() with true");
+                AppLogger::info("Exit UserDataService.findByUser() with true");
                 return $user['id'];
             }
 
             else {
-                Log::info("Exit UserDataService.findByUser() with false");
+                AppLogger::info("Exit UserDataService.findByUser() with false");
                 return null;
             }
         }
 
         catch (PDOException $e){
             //log exception and throw custom exception
-            Log::error("Exception: ", array("message" => $e->getMessage()));
+            AppLogger::error("Exception: ", array("message" => $e->getMessage()));
             throw new DatabaseException("Database Exception: " . $e->getMessage(), 0, $e);
         }
     }
