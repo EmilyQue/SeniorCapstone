@@ -2,7 +2,7 @@
 
 namespace App\Services\Utility;
 
-interface ILogger
+interface ILoggerService
 {
     static function getLogger();
     public static function debug($message, $data);

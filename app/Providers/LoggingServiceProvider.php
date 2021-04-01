@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use App\Services\Utility\MyLogger;
+use App\Services\Utility\AppLogger;
 
 class LoggingServiceProvider extends ServiceProvider
 {
@@ -27,7 +27,7 @@ class LoggingServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('App\Services\Utility\ILoggerService', function ($app) {
-            return new MyLogger();
+            return new AppLogger();
         });
     }
 

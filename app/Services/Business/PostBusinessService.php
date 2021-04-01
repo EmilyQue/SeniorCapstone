@@ -6,6 +6,7 @@ use \PDO;
 use App\Models\PostModel;
 use App\Services\Data\PostDataService;
 use App\Services\Utility\AppLogger;
+use App\Services\Utility\DatabaseConnection;
 
 class PostBusinessService {
 /**
@@ -16,13 +17,8 @@ class PostBusinessService {
     public function create(PostModel $post) {
         AppLogger::info("Entering PostBusinessService.create()");
 
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post service dao with this connection and try to create post
         $service = new PostDataService($conn);
@@ -41,15 +37,8 @@ class PostBusinessService {
     public function findPostByName($post) {
         AppLogger::info("Entering PostBusinessService.findPostByName()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to find the blog post by name
         $service = new PostDataService($conn);
@@ -67,15 +56,8 @@ class PostBusinessService {
     public function findAllBlogPosts() {
         AppLogger::info("Entering PostBusinessService.findAllBlogPosts()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to find all blog posts
         $service = new PostDataService($conn);
@@ -94,15 +76,8 @@ class PostBusinessService {
     public function removeBlogPost($id) {
         AppLogger::info("Entering PostBusinessService.removeBlogPost()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to delete the blog post
         $service = new PostDataService($conn);
@@ -121,15 +96,8 @@ class PostBusinessService {
     public function findBlogPostByUserID($id) {
         AppLogger::info("Entering PostBusinessService.findBlogPostByUserID()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to find blog post by id
         $service = new PostDataService($conn);
@@ -148,15 +116,8 @@ class PostBusinessService {
     public function findBlogPostByID($id) {
         AppLogger::info("Entering PostBusinessService.findBlogPostByID()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to find blog post by id
         $service = new PostDataService($conn);
@@ -175,15 +136,8 @@ class PostBusinessService {
     public function findFeaturedPosts() {
         AppLogger::info("Entering PostBusinessService.findFeaturedPosts()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a post dao with this connection and try to find blog post by id
         $service = new PostDataService($conn);
@@ -202,14 +156,9 @@ class PostBusinessService {
     public function editPostInfo(PostModel $post) {
         AppLogger::info("Entering PostBusinessService.editPostInfo()");
 
-        // get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-        // create connection to database
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
+
         // create a post dao with this connection and try to update blog post info
         $service = new PostDataService($conn);
         $flag = $service->updatePost($post);

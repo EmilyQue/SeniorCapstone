@@ -7,6 +7,7 @@ use \PDO;
 use App\Models\UserModel;
 use App\Services\Data\UserDataService;
 use App\Services\Utility\AppLogger;
+use App\Services\Utility\DatabaseConnection;
 
 class UserBusinessService {
 /**
@@ -17,13 +18,8 @@ class UserBusinessService {
     public function create(UserModel $user) {
         AppLogger::info("Entering UserBusinessService.create()");
 
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a recipe service dao with this connection and try to create recipe
         $service = new UserDataService($conn);
@@ -42,15 +38,8 @@ class UserBusinessService {
     public function login(CredentialsModel $user) {
         AppLogger::info("Entering UserBusinessService.login()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create a security service dao with this connection and try to find the password in user
         $service = new UserDataService($conn);

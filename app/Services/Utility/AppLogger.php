@@ -6,7 +6,7 @@ use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Monolog\Formatter\LineFormatter;
 
-class AppLogger implements ILogger
+class AppLogger implements ILoggerService
 {
     private static $logger = null;
 

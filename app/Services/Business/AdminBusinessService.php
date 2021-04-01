@@ -5,6 +5,8 @@ namespace App\Services\Business;
 use \PDO;
 use App\Services\Data\AdminDataService;
 use App\Services\Utility\AppLogger;
+use App\Services\Utility\DatabaseConnection;
+
 class AdminBusinessService {
     /**
      * Suspend user
@@ -14,15 +16,8 @@ class AdminBusinessService {
     public function suspendUser($id) {
         AppLogger::info("Entering AdminBusinessService.suspendUser()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //create connection to database
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //connect to database
+        $conn = new DatabaseConnection();
 
         //create an admin dao with this connection and try to find and suspend user
         $service = new AdminDataService($conn);
@@ -41,15 +36,8 @@ class AdminBusinessService {
     public function unsuspendUser($id) {
         AppLogger::info("Entering AdminBusinessService.unsuspendUser()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
         //create connection to database
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $conn = new DatabaseConnection();
 
         //create an admin dao with this connection and try to find and unsuspend user
         $service = new AdminDataService($conn);
@@ -67,16 +55,8 @@ class AdminBusinessService {
     public function showUsers() {
         AppLogger::info("Entering AdminBusinessService.showUsers()");
 
-        //get credentials for accessing the database
-        $servername = config("database.connections.mysql.host");
-        $dbname = config("database.connections.mysql.database");
-        $username = config("database.connections.mysql.username");
-        $password = config("database.connections.mysql.password");
-
-        //best practice: do not create database connections in a dao
-        //create connection
-        $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //create connection to database
+        $conn = new DatabaseConnection();
 
         //create an admin dao with this connection and try to display all users
         $service = new AdminDataService($conn);
