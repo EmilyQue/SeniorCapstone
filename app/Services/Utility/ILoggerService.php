@@ -6,5 +6,5 @@ interface ILoggerService
     public function debug($message, $data=array());
     public function info($message, $data=array());
     public function warning($message, $data=array());
-    public function error($message, $data=array());
+    public static function error($message, $data=array());
 }

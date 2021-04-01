@@ -109,3 +109,9 @@ Route::get('/adminSuspend', 'App\Http\Controllers\AdminController@suspendUser');
 
 /*Fetches the get parameters of unsuspendUser method in the Admin controller*/
 Route::get('/adminUnsuspend', 'App\Http\Controllers\AdminController@unsuspendUser');
+
+/* REST API */
+Route::resource('/usersrest', 'App\Http\Controllers\UsersRestController');
+
+Route::resource('/postsrest', 'App\Http\Controllers\PostsRestController');
+

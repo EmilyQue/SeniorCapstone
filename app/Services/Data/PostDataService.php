@@ -111,6 +111,7 @@ class PostDataService {
                     //inserts variables into end of array
                     array_push($postArray, $post);
                 }
+
                 //return post array
                 Log::info("Exiting PostDataService.findAllPosts() with true");
                 return $postArray;
@@ -216,6 +217,7 @@ class PostDataService {
                 //inserts variables into end of array
                 array_push($list, $postSearch);
             }
+
             //return list array that holds job variables
             Log::info("Exiting PostDataService.findPostByID() with true");
             return $list;

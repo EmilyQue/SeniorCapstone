@@ -82,8 +82,8 @@ class PostBusinessService {
         $flag = $service->findAllPosts();
 
         //return the finder results
-        Log::info("Exit PostBusinessService.findAllBlogPosts() with " . $flag);
         return $flag;
+        Log::info("Exit PostBusinessService.findAllBlogPosts() with " . $flag);
     }
 
     /**

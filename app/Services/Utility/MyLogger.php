@@ -13,7 +13,7 @@ class MyLogger implements ILoggerService
         Log::info($message . (count($data) != 0 ? ' with data of ' . print_r($data, true) : ""));
     }
 
-    public function error($message, $data=array())
+    public static function error($message, $data=array())
     {
         Log::error($message . (count($data) != 0 ? ' with data of ' . print_r($data, true) : ""));
     }
