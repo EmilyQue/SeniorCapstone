@@ -66,22 +66,23 @@ class PostDataService {
         AppLogger::info("Entering PostDataService.findPostByName()");
         try{
             //prepared statement is created
-            $stmt = $this->conn->prepare("SELECT id, title, description, content, date, image, users_id FROM posts WHERE title LIKE '%".$post."%' OR description LIKE '%".$post."%' ");
+            $stmt = $this->conn->prepare("SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id WHERE posts.title LIKE '%".$post."%' OR posts.description LIKE '%".$post."%' ");
 
             //array is created and statement is executed
-            $list = array();
+            // $list = array();
             $stmt->execute();
+            $posts = $stmt->fetchAll();
 
             //loops through table  using stmt->fetch
-            for ($i = 0; $row = $stmt->fetch(); $i++) {
-                //post model is created
-                $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
-                //inserts variables into end of array
-                array_push($list, $postSearch);
-            }
+            // for ($i = 0; $row = $stmt->fetch(); $i++) {
+            //     //post model is created
+            //     $postSearch = new PostModel($row['id'], $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
+            //     //inserts variables into end of array
+            //     array_push($list, $postSearch);
+            // }
             //return list array that holds post variables
             AppLogger::info("Exit PostDataService.findPostByName() with true");
-            return $list;
+            return $posts;
         }
 
         catch (PDOException $e){
@@ -203,24 +204,25 @@ class PostDataService {
         AppLogger::info("Entering PostDataService.findPostByUserID()");
         try{
             //prepared statement is created and user id is binded
-            $stmt = $this->conn->prepare('SELECT * FROM posts WHERE id = :id');
+            $stmt = $this->conn->prepare('SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id WHERE posts.id = :id');
             $stmt->bindParam(':id', $id);
 
             //list array is created and statement is executed
-            $list = array();
+            // $list = array();
             $stmt->execute();
+            $posts = $stmt->fetchAll();
 
             //loops through table  using stmt->fetch
-            for ($i = 0; $row = $stmt->fetch(); $i++) {
-                //post model is created
-                $postSearch = new PostModel($id, $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
-                //inserts variables into end of array
-                array_push($list, $postSearch);
-            }
+            // for ($i = 0; $row = $stmt->fetch(); $i++) {
+            //     //post model is created
+            //     $postSearch = new PostModel($id, $row['title'], $row['description'], $row['content'], $row['date'], $row['image'], $row['users_id']);
+            //     //inserts variables into end of array
+            //     array_push($list, $postSearch);
+            // }
 
             //return list array that holds job variables
             AppLogger::info("Exiting PostDataService.findPostByID() with true");
-            return $list;
+            return $posts;
         }
 
         catch (PDOException $e){

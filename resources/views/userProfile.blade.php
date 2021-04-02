@@ -3,10 +3,19 @@
 
 @section('content')
 <div class="profile-content">
-    <div class="shadow-box">
         {{-- User Profile --}}
         <div class="container">
-            <div class="row my-2">
+            <h1>My Profile</h1>
+
+            <div class="row my-2" id="profile">
+                <div class="col-lg-2 order-lg-1 text-center">
+                    <img src="images/user.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                    {{-- <h6 class="mt-2">Upload a different photo</h6>
+                    <label class="custom-file">
+                        <input type="file" id="file" class="custom-file-input">
+                        <span class="custom-file-control">Choose file</span>
+                    </label> --}}
+                </div>
                 <div class="col-lg-8 order-lg-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
@@ -98,14 +107,6 @@
                             @endif
                     </div>
                 </div>
-                <div class="col-lg-4 order-lg-1 text-center">
-                    <img src="images/user.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
-                    {{-- <h6 class="mt-2">Upload a different photo</h6>
-                    <label class="custom-file">
-                        <input type="file" id="file" class="custom-file-input">
-                        <span class="custom-file-control">Choose file</span>
-                    </label> --}}
-                </div>
             </div>
         </div>
         <br>
@@ -116,7 +117,7 @@
         {{-- Recent Travels --}}
 
 <div class="travels">
-        <h3>Recent Travels <i class="fas fa-plus-circle" data-toggle="modal" data-target="#myModal"></i></h3>
+        <h3>Recent Travels <i class="fas fa-plus" data-toggle="modal" data-target="#myModal"></i></h3>
         <div class="container">
             <div class="row">
                 @if(count($travel) != 0)
@@ -179,7 +180,6 @@
             </form>
         </div>
       </div>
-    </div>
   </div>
 
 @endsection

@@ -51,7 +51,7 @@
 
 
 /* Login Form */
-.login-form, .add-form {
+.login-form {
     width: 650px;
     margin: 150px auto;
     padding: 0 40px;
@@ -130,51 +130,6 @@
     padding: 30px;
 }
 
-.home-content .shadow-box #search {
-    width: 100%;
-    position: relative;
-    display: flex;
-}
-
-.home-content .shadow-box #search form{
-    width: 100%;
-    position: relative;
-    display: flex;
-}
-
-.home-content .shadow-box .searchTerm {
-    width: 100%;
-    border: 3px solid #f08700;
-    border-right: none;
-    padding: 5px;
-    height: 36px;
-    border-radius: 5px 0 0 5px;
-    outline: none;
-    color: #f08700;
-}
-
-.home-content .shadow-box .searchTerm:focus{
-    color: #f08700;
-    font-weight:600;
-}
-
-.home-content .shadow-box .searchButton {
-    width: 40px;
-    height: 36px;
-    border: 1px solid #f08700;
-    background: #f08700;
-    text-align: center;
-    color: #fff;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.home-content .shadow-box .searchButton:hover {
-    background: #00a6a6;
-    border: 1px solid #00a6a6;
-}
-
 /* Master Header */
 header.masthead {
     width: 92%;
@@ -215,6 +170,60 @@ header.masthead h1 {
     margin: 50px 0;
     color: #c39f76;
     font-family: 'Playfair Display', serif;
+}
+
+/* Explore Page */
+.explore-content h1{
+    font-family: 'Playfair Display', serif;
+    color: #c39f76;
+    margin: 40px 0;
+}
+
+/* Search Bar */
+.explore-content #search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.explore-content #search form{
+    width: 91%;
+    position: relative;
+    display: flex;
+    margin: 20px auto;
+}
+
+.explore-content .searchTerm {
+    width: 100%;
+    border: 1px solid #c39f76;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #c39f76;
+}
+
+.explore-content .searchTerm:focus{
+    color: #c39f76;
+    font-weight:600;
+}
+
+.explore-content .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #c39f76;
+    background: #c39f76;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.explore-content .searchButton:hover {
+    background: #d4b99a;
+    border: 1px solid #d4b99a;
 }
 
 /* Content Card */
@@ -297,6 +306,113 @@ header.masthead h1 {
     color: white;
 }
 
+/* Individual Post */
+.post-content{
+    width: auto;
+    margin: 40px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.post-content h2{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.post-content p.card-text-author{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+}
+
+.post-content .card-body{
+    padding: 0 15px;
+    margin: 20px auto;
+    font-family: 'Playfair Display', serif;
+}
+
+.post-content .card-img-top{
+    width: 97%;
+    margin: 0 auto;
+}
+
+.post-content a{
+    font-family: 'Playfair Display', serif;
+    color: black!important;
+    padding: 0 20px;
+}
+
+/* Search Result */
+.search-content{
+    width: auto;
+    margin: 40px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.search-content h3{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.search-content h4{
+    font-family: 'Playfair Display', serif;
+    margin: 20px auto;
+}
+
+.search-content a{
+    font-family: 'Playfair Display', serif;
+    color: black!important;
+    padding: 20px !important;
+}
+
+/* My Posts */
+.userposts-content{
+    width: auto;
+    margin: 50px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.userposts-content h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.userposts-content i{
+    font-size: 22px;
+    color: #c39f76;
+}
+
+.userposts-content h3{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    margin: 20px auto;
+}
+
+/* Add Post */
+.add-form{
+    width: 650px;
+    margin: 20px auto;
+    padding: 0 40px;
+  	font-size: 15px;
+}
+
+.add-form form{
+    margin-bottom: 15px;
+    background: #ffffff;
+    padding: 30px;
+}
+
+.add-form h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
 /* Profile */
 .profile-content{
     width: auto;
@@ -305,44 +421,60 @@ header.masthead h1 {
   	font-size: 15px;
 }
 
-.profile-content .shadow-box {
-    margin-bottom: 15px;
-    background: #ffffff;
-	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-    padding: 30px;
-}
-
-.profile-content .shadow-box .nav-item a{
+.profile-content .nav-item a{
     color:black !important;
 }
 
-.profile-content .shadow-box .btn-primary{
-    background-color: #f08700;
+.profile-content .btn-primary{
+    background-color: #c39f76;
     color: white;
-    border: #f08700;
+    border: #c39f76;
 }
 
-.profile-content .shadow-box .btn-primary:hover{
-    background-color: #f49f0a;
+.profile-content .btn-primary:hover{
+    background-color: #d4b99a;
     color: white;
-    border: #f49f0a;
+    border: #d4b99a;
 }
 
 /* recent travels */
-.profile-content .shadow-box .travels h3{
+.profile-content .travels h3{
     text-align: center;
 }
 
-.profile-content .shadow-box .travels .card-desc{
+.profile-content .travels .card-desc{
     height:auto;
 }
 
-.add-form{
-    margin-top: 40px;
+.profile-content h1, h3, h5, h4{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.profile-content i{
+    font-size: 18px;
+}
+
+.profile-content i:hover{
+    cursor: pointer;
+}
+
+.modal-footer button{
+    background-color: #c39f76;
+    color: white;
+    border: #c39f76;
+}
+
+.modal-footer button:hover {
+    background-color: #d4b99a;
+    color: white;
+    border: #d4b99a;
 }
 
 @media only screen and (max-width: 690px){
-    .login-form, .register-form, .home-content {
+    .login-form, .register-form, .home-content, .add-form {
         width: auto;
     }
 

@@ -6,6 +6,16 @@
 <div class="explore-content">
         <h1 class="text-center">All Posts</h1>
 
+        {{-- Search Bar --}}
+        <div id="search">
+            <form action="/search">
+            <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
+            <button type="submit" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+            </form>
+        </div>
+
         <div class="container">
             <div class="row">
             @if(!empty($posts))

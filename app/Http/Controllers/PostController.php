@@ -127,14 +127,13 @@ class PostController extends Controller {
         try {
             //get session user id and username
             $id = $_GET['id'];
-            $username = session()->get('username');
 
             //call post business service
             $service = new PostBusinessService();
             $posts = $service->findBlogPostByID($id);
 
             //render a response view
-            return view('displaySinglePost')->with(['posts' => $posts, 'username' => $username]);
+            return view('displaySinglePost')->with(['posts' => $posts]);
 
         }
 
@@ -310,9 +309,5 @@ class PostController extends Controller {
             $data = ['errorMsg' => $e->getMessage()];
             return view('exception')->with($data);
         }
-    }
-
-    public function pagination(){
-
     }
 }

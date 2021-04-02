@@ -3,7 +3,7 @@
 
 @section('content')
 
-<div class="profile-content">
+<div class="userposts-content">
         <h1 class="text-center">My Posts <a href="addPost"><i class="fas fa-plus"></i></a></h1>
         <div class="container">
             <div class="row">
@@ -26,9 +26,9 @@
                     </div>
                 @endforeach
             @else
-                <h3>No Blog Posts Yet!</h3>
+                <h3>No Blog Posts <br><small>Click the + to add your first post!</small></h3>
             @endif
-            </div>
+        </div>
         </div>
 </div>
 @endsection

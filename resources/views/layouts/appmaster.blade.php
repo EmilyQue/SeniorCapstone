@@ -25,6 +25,7 @@
         .section{
             background: white;
             width: 80%;
+            min-height: 100%;
             padding: 20px 0;
             margin: 0 auto;
         }
