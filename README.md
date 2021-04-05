@@ -1,53 +1,34 @@
-## About the Project
+# ADVENTR: A Community Travel Guide
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Introduction
+The purpose of this project is to encourage and allow new or expert travelers to share their experiences, whether good or bad, with others as well as sharing any recommendations related to food, sights to see, places to stay, etc.. For many people, planning a vacation is often a difficult and stressful task but this site would facilitate the process of creating an itinerary. Through personal experience and observation, a variety of random sites on Google are used by travelers to answer any questions during planning. Having all that information presented in one single place would provide a more convenient solution to the problem. 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Requirements
+##### Technical and Non-Technical Requirements
+The project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)
 
-## Learning Laravel
+##### Cloud Hosting
+The project is hosted on Heroku, which can be viewed [here](http://adventr-blog.herokuapp.com/home)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+##### DevOps Integration
+* Logging: A single logger was created so standard log statements complete with the date, time, level of severity, message, and context were outputted. The log statements were called for the entry and exit of all the methods in the controllers, business services, and data services, as well as any exceptions found within the application.
+* Monitoring: Monitoring was integrated through the use of UptimeRobot, which is a monitoring service that keeps track of the status codes of the application every 5 minutes and alerts the developer if the website is down.
+* CI/CD: A build pipeline was integrated through the use of Heroku and Github. 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Technologies
+The technologies used in this project include:
+* Visual Studio Code (Version: 1.53.2 for Mac & Windows) 
+* Laravel (Version: 8.22.1) 
+* PHP (Version: 7.4.5) 
+* MySQL
+* Xampp
+* Bootstrap
+* Github
 
-## Laravel Sponsors
+## Technical Approach
+The general technical approach taken was to design the diagrams and wireframes first, to understand what the application would look like. Then I set up the database in MySQL to have the proper tables. I used a previous project of a blog that I made a few semesters ago as a reference. During that time, I used the Laravel framework to create the blog, which is why I decided to use the same framework to make this project, as it is the one that I am most familiar with. Additionally, I plan to use Bootstrap for the user interface.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Outstanding Issues
+There are currently no outstanding issues.
