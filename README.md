@@ -9,7 +9,7 @@ The purpose of this project is to encourage and allow new or expert travelers to
 
 ##### Technical Requirements
 Below is a use case diagram that demonstrates the different ways that a regular user may interact with the site. Additionally, a user will have the ability to view posts by other users, search for a specific post, add recent travels to their profile as well as editing their own profile, as long as they have successfully logged into their account. If they do not have an account, then they will have to create one when they first access the site. Also below is a use case diagram that demonstrates the different ways that an admin user may interact with the site.
-<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/use%20case%20capstone.png" width="340" height="300">
+<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20use%20case.png" width="340" height="300">
 
 ##### Non-Technical Requirements
 User stories, which contains details about the non-technical requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/User%20Stories_Revised.xls)
