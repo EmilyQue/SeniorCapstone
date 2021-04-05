@@ -12,7 +12,7 @@ Below is a use case diagram that demonstrates the different ways that a regular 
 ##### Non-Technical Requirements
 User stories, which contains details about the non-technical requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/User%20Stories_Revised.xls)
 
-More information about the project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)
+*More information about the project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)*
 
 ##### Cloud Hosting
 The project is hosted on Heroku, which can be viewed [here](http://adventr-blog.herokuapp.com/home)
