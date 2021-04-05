@@ -5,8 +5,16 @@
 The purpose of this project is to encourage and allow new or expert travelers to share their experiences, whether good or bad, with others as well as sharing any recommendations related to food, sights to see, places to stay, etc.. For many people, planning a vacation is often a difficult and stressful task but this site would facilitate the process of creating an itinerary. Through personal experience and observation, a variety of random sites on Google are used by travelers to answer any questions during planning. Having all that information presented in one single place would provide a more convenient solution to the problem. 
 
 ## Requirements
-##### Technical and Non-Technical Requirements
-The project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)
+##### Technical Requirements
+Below is a use case diagram that demonstrates the different ways that a regular user may interact with the site. Additionally, a user will have the ability to view posts by other users, search for a specific post, add recent travels to their profile as well as editing their own profile, as long as they have successfully logged into their account. If they do not have an account, then they will have to create one when they first access the site. Also below is a use case diagram that demonstrates the different ways that an admin user may interact with the site.
+<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/use%20case%20capstone.png" width="500" height="470">
+
+##### Non-Technical Requirements
+User stories, which contains details about the non-technical requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/User%20Stories_Revised.xls)
+<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/use%20case%20capstone.png" width="500" height="470">
+
+
+More information about the project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)
 
 ##### Cloud Hosting
 The project is hosted on Heroku, which can be viewed [here](http://adventr-blog.herokuapp.com/home)
