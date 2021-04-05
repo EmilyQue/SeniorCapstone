@@ -36,7 +36,7 @@ The technologies used in this project include:
 The general technical approach taken was to design the diagrams and wireframes first, to understand what the application would look like. Then I set up the database in MySQL to have the proper tables. I used a previous project of a blog that I made a few semesters ago as a reference. During that time, I used the Laravel framework to create the blog, which is why I decided to use the same framework to make this project, as it is the one that I am most familiar with. Additionally, I plan to use Bootstrap for the user interface.
 
 Logical Diagram <br/>
-<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20logical.png width="400" height="470">
+<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20logical.png width="400" height="470"> 
 
 The sitemap diagram below shows the connections between each web page. The registration page directs the user to the login page, and the login page directs the user to the home page. The home page will have access to the posts and user account. 
 <img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20sitemap.png" width="400" height="470">
