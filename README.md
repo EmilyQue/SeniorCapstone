@@ -30,10 +30,10 @@ The technologies used in this project include:
 The general technical approach taken was to design the diagrams and wireframes first, to understand what the application would look like. Then I set up the database in MySQL to have the proper tables. I used a previous project of a blog that I made a few semesters ago as a reference. During that time, I used the Laravel framework to create the blog, which is why I decided to use the same framework to make this project, as it is the one that I am most familiar with. Additionally, I plan to use Bootstrap for the user interface.
 
 The sitemap diagram below shows the connections between each web page. The registration page directs the user to the login page, and the login page directs the user to the home page. The home page will have access to the posts and user account. 
-![sitemap](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20sitemap.png)
+<img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20sitemap.png" width="400" height="470">
 
 The entity relationship diagram shows how each entity stored in a database is related to each other. For this project, there are four entities: users, posts, profile, and recent travels.
-![database](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20er%20diagram.png)
+\ <img src="https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20er%20diagram.png" width="400" height="250">
 
 The class diagram models the structure of a system by showing the relationships between each classes, objects, and operations. For this project, I will be using the n-layer architecture and Model-View-Controller pattern. The model holds the data, the view consists of the user interface, and the controller processes user input. N-layer architecture consists of the presentation layer, business logic layer, and data access layer.
 ![class diagram](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/diagrams/capstone%20classdiagram.png)
