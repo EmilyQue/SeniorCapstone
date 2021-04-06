@@ -99,7 +99,7 @@
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
                                                 <input type="submit" class="btn btn-primary" value="Save Changes">
-                                                <input type="button" onclick="javascript:history.back()" class="btn btn-primary" value="Cancel">
+                                                <input type="button" onclick="window.history.back()" class="btn btn-primary" value="Cancel">
                                             </div>
                                         </div>
                                     </form>
