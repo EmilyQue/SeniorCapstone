@@ -19,7 +19,7 @@
                 <div class="col-lg-8 order-lg-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="" data-target="#profile" data-toggle="tab" class="nav-link active" style="font-family: 'Playfair Display', serif;">Profile</a>
+                            <a href="" data-target="#profile" data-toggle="tab" class="nav-link active" style="font-family: 'Playfair Display', serif; font-weight: 500; ">Profile</a>
                         </li>
 
                         @if(count($profile) != 0)
@@ -41,31 +41,31 @@
                                     </div>
                                     @endforeach
                             @else
-                                <h4>Add Your Profile Information Here: </h4>
+                                <h4 style="font-family: 'Playfair Display', serif;">Add Your Profile Information Here: </h4>
                                 <form role="form" action="addProfile" method="POST">
                                     <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                        <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">Name</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="" name="name" required="required">
+                                            <input class="form-control" type="text" value="" name="name" required="required" style="font-family: 'Playfair Display', serif;">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
+                                        <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">Where I'm From</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="" name="country" required="required">
+                                            <input class="form-control" type="text" value="" name="country" required="required" style="font-family: 'Playfair Display', serif;">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-lg-3 col-form-label form-control-label">About Me</label>
+                                        <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">About Me</label>
                                         <div class="col-lg-9">
-                                            <textarea class="form-control" name="about" placeholder="" required="required" rows="3"></textarea>
+                                            <textarea class="form-control" name="about" placeholder="" required="required" rows="3" style="font-family: 'Playfair Display', serif;"></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label"></label>
                                         <div class="col-lg-9">
-                                            <input type="submit" class="btn btn-primary" value="Save Changes">
+                                            <input type="submit" class="btn btn-primary" value="Save Changes" style="font-family: 'Playfair Display', serif;">
                                         </div>
                                     </div>
                                 </form>
@@ -78,28 +78,28 @@
                                         <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
                                         <input type="hidden" name="id" value='{{$p->getId()}}'/>
                                         <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                            <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">Name</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="name" value="{{$p->getName()}}" required="required">
+                                                <input class="form-control" type="text" name="name" value="{{$p->getName()}}" required="required" style="font-family: 'Playfair Display', serif;">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">Where I'm From</label>
+                                            <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">Where I'm From</label>
                                             <div class="col-lg-9">
-                                                <input class="form-control" type="text" name="country" value="{{$p->getCountry()}}" required="required">
+                                                <input class="form-control" type="text" name="country" value="{{$p->getCountry()}}" required="required" style="font-family: 'Playfair Display', serif;">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-3 col-form-label form-control-label">About Me</label>
+                                            <label class="col-lg-3 col-form-label form-control-label" style="font-family: 'Playfair Display', serif;">About Me</label>
                                             <div class="col-lg-9">
-                                                <textarea class="form-control" name="about" placeholder="" required="required" rows="3">{{$p->getAbout()}}</textarea>
+                                                <textarea class="form-control" name="about" placeholder="" required="required" rows="3" style="font-family: 'Playfair Display', serif;">{{$p->getAbout()}}</textarea>
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
-                                                <input type="submit" class="btn btn-primary" value="Save Changes">
-                                                <input type="button" onclick="window.location.replace('/profile')" class="btn btn-primary" value="Cancel">
+                                                <input type="submit" class="btn btn-primary" value="Save Changes" style="font-family: 'Playfair Display', serif;">
+                                                <input type="button" onclick="window.location.replace('/profile')" class="btn btn-primary" value="Cancel" style="font-family: 'Playfair Display', serif;">
                                             </div>
                                         </div>
                                     </form>
