@@ -5,7 +5,7 @@
 The purpose of this project is to encourage and allow new or expert travelers to share their experiences, whether good or bad, with others as well as sharing any recommendations related to food, sights to see, places to stay, etc.. For many people, planning a vacation is often a difficult and stressful task but this site would facilitate the process of creating an itinerary. Through personal experience and observation, a variety of random sites on Google are used by travelers to answer any questions during planning. Having all that information presented in one single place would provide a more convenient solution to the problem. 
 
 ## Requirements
-*More information about the project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Milestone%206%20Test%20Cases.xls)*
+*More information about the project requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/Project%20Requirements_Revised.docx)*
 
 ##### Technical Requirements
 Below is a use case diagram that demonstrates the different ways that a regular user may interact with the site. Additionally, a user will have the ability to view posts by other users, search for a specific post, add recent travels to their profile as well as editing their own profile, as long as they have successfully logged into their account. If they do not have an account, then they will have to create one when they first access the site. Also below is a use case diagram that demonstrates the different ways that an admin user may interact with the site.
@@ -15,7 +15,7 @@ Below is a use case diagram that demonstrates the different ways that a regular 
 User stories, which contains details about the non-technical requirements can be found [here](https://github.com/EmilyQue/SeniorCapstone/blob/main/documents/User%20Stories_Revised.xls)
 
 ##### Cloud Hosting
-As for the choice of cloud provider, I decided to use Heroku because this provider supports any version of PHP that is greater than 7.3 and is able to support a SQL database and the use of the Laravel framework. This would be the best option since I am experienced with Heroku. The project can be viewed [here](http://adventr-blog.herokuapp.com/home)
+As for the choice of cloud provider, I decided to use Heroku because this provider supports any version of PHP that is greater than 7.3 and is able to support a SQL database and the use of the Laravel framework. This would be the best option since I am most experienced with Heroku. The project can be viewed [here](http://adventr-blog.herokuapp.com/home)
 
 ##### DevOps Integration
 * Logging: A single logger was created so standard log statements complete with the date, time, level of severity, message, and context were outputted. The log statements were called for the entry and exit of all the methods in the controllers, business services, and data services, as well as any exceptions found within the application.
