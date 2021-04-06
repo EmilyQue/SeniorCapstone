@@ -19,12 +19,12 @@
                 <div class="col-lg-8 order-lg-2">
                     <ul class="nav nav-tabs">
                         <li class="nav-item">
-                            <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
+                            <a href="" data-target="#profile" data-toggle="tab" class="nav-link active" style="font-family: 'Playfair Display', serif;">Profile</a>
                         </li>
 
                         @if(count($profile) != 0)
                         <li class="nav-item">
-                            <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
+                            <a href="" data-target="#edit" data-toggle="tab" class="nav-link" style="font-family: 'Playfair Display', serif;">Edit</a>
                         </li>
                         @endif
                     </ul>
@@ -32,11 +32,11 @@
                         <div class="tab-pane active" id="profile">
                             @if(count($profile) != 0)
                                 @foreach($profile as $c)
-                                    <h5 class="mb-3">{{$c->getName()}} | <small>{{$c->getCountry()}}</small></h5>
+                                    <h5 class="mb-3" style="text-align: left">{{$c->getName()}} | <small>{{$c->getCountry()}}</small></h5>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <h6>About Me</h6>
-                                            <p>{{$c->getAbout()}}</p>
+                                            <h6 style="font-family: 'Playfair Display', serif;">About Me</h6>
+                                            <p style="font-family: 'Playfair Display', serif;">{{$c->getAbout()}}</p>
                                         </div>
                                     </div>
                                     @endforeach

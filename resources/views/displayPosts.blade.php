@@ -7,7 +7,7 @@
         {{-- Search Bar --}}
         <div id="search">
             <form action="/search">
-            <input type="text" name="search" class="searchTerm" placeholder="What are you looking for?">
+            <input type="text" name="search" class="searchTerm" style="font-family: 'Playfair Display', serif;" placeholder="What are you looking for?">
             <button type="submit" class="searchButton">
                 <i class="fa fa-search"></i>
             </button>
