@@ -9,7 +9,7 @@
 
             <div class="row my-2" id="profile">
                 <div class="col-lg-2 order-lg-1 text-center">
-                    <img src="images/user.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+                    <img src="resources/images/user.jpg" class="mx-auto img-fluid img-circle d-block" alt="avatar">
                     {{-- <h6 class="mt-2">Upload a different photo</h6>
                     <label class="custom-file">
                         <input type="file" id="file" class="custom-file-input">
@@ -99,7 +99,7 @@
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
                                                 <input type="submit" class="btn btn-primary" value="Save Changes">
-                                                <input type="button" onclick="window.history.back()" class="btn btn-primary" value="Cancel">
+                                                <input type="button" onclick="history.back()" class="btn btn-primary" value="Cancel">
                                             </div>
                                         </div>
                                     </form>
@@ -126,7 +126,7 @@
                         <div class="col-md-4">
                             <div class="card-content">
                                 <div class="card-img">
-                                    <img src="images/{{$p->getImage()}}" alt="">
+                                    <img src="resources/images/{{$p->getImage()}}" alt="">
                                 </div>
                                 <div class="card-desc">
                                     <h3>{{$p->getDestination()}}</h3>
