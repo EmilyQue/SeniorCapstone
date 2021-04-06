@@ -18,7 +18,7 @@
                         <h2 class="text-center">{{$c['title']}}</h2>
                         <p class="card-text-author"><small class="text-muted"><i>by </i> {{$c['firstName']}} {{$c['lastName']}} <i> on </i> {{$c['date']}}</small></p>
                     </div>
-                    <img src="images/{{$c['image']}}" class="card-img-top">
+                    <img src="resources/images/{{$c['image']}}" class="card-img-top">
                     <div class="card-body">
                     <p class="card-text">{{$c['content']}}</p>
                     </div>
