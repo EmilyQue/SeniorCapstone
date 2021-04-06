@@ -4,8 +4,6 @@
 @section('content')
 
 <div class="explore-content">
-        <h1 class="text-center">All Posts</h1>
-
         {{-- Search Bar --}}
         <div id="search">
             <form action="/search">

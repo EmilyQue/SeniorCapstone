@@ -135,7 +135,7 @@ header.masthead {
     width: 92%;
     position: relative;
     background-color: #343a40;
-    background: url("/images/santorini.jpg") no-repeat center center;
+    background: url("resources/images/santorini.jpg") no-repeat center center;
     background-size: cover;
     padding-top: 128px;
     padding-bottom: 128px;
