@@ -1,0 +1,491 @@
+.container{
+    margin-top: 20px;
+}
+
+/* Navigation bar */
+.navbar {
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    width: auto;
+}
+
+.header{
+    margin: 20px;
+}
+
+.header h1{
+    color: #c39f76;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+}
+
+.header h4{
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 40px;
+}
+
+.navbar i{
+    padding: 5px;
+}
+
+.navbar a{
+    font-family: 'Playfair Display', serif;
+}
+
+.navbar .navbar-nav{
+    margin: 0 auto;
+}
+
+.navbar button{
+    margin: 0 auto;
+}
+
+.navbar a, .navbar a:active {
+	color: rgba(0,0,0,.5);
+	background: transparent;
+}
+
+.navbar .navbar-nav a:hover, .navbar .navbar-nav a:focus {
+	color: #c39f76 !important;
+}
+
+
+/* Login Form */
+.login-form {
+    width: 650px;
+    margin: 150px auto;
+    padding: 0 40px;
+  	font-size: 15px;
+}
+
+.register-form {
+    width: 650px;
+    margin: 80px auto;
+    padding: 0 40px;
+  	font-size: 15px;
+}
+
+.login-form form, .register-form form {
+    margin-bottom: 15px;
+    background: #ffffff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    padding: 30px;
+}
+
+.login-form h1, .register-form h1 {
+    margin: 0 0 15px;
+    color: #c39f76;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 700;
+}
+
+.login-form h4, .register-form h4{
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 20px;
+}
+
+.login-form .btn, .register-form .btn, .add-form .btn{
+    display: inline-block;
+    padding: 8px 22px 10px;
+    line-height: 1;
+    margin: 12px auto 0;
+    text-align: center;
+    color: white;
+    background: #c39f76;
+}
+
+.login-form .btn:hover, .register-form .btn:hover, .add-form .btn:hover{
+    background: #d4b99a;
+    color: white;
+}
+
+.login-form h6, .register-form h6{
+    font-family: 'Playfair Display', serif;
+}
+
+.login-form a, .register-form a{
+    color: black!important;
+    text-align: center;
+}
+
+.login-form a:hover, .register-form a:hover{
+    text-decoration: underline;
+}
+
+.register-form .error{
+    color: red;
+}
+
+/* Home Page */
+.home-content{
+    width: auto;
+    margin: 50px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+.home-content .shadow-box {
+    margin-bottom: 15px;
+    background: #ffffff;
+	box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+    padding: 30px;
+}
+
+/* Master Header */
+header.masthead {
+    width: 92%;
+    position: relative;
+    background-color: #343a40;
+    background: url("/images/santorini.jpg") no-repeat center center;
+    background-size: cover;
+    padding-top: 128px;
+    padding-bottom: 128px;
+    margin-top: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header.masthead .container{
+    margin-left: -50px;
+}
+
+header.masthead .overlay {
+    position: absolute;
+    background-color: #212529;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.3;
+}
+
+header.masthead h1 {
+    font-family: 'Work Sans', sans-serif;
+    font-size: 32px;
+    text-align: left;
+}
+
+/* Recent Post */
+.content h1{
+    text-align: center;
+    margin: 50px 0;
+    color: #c39f76;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Explore Page */
+.explore-content h1{
+    font-family: 'Playfair Display', serif;
+    color: #c39f76;
+    margin: 40px 0;
+}
+
+/* Search Bar */
+.explore-content #search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.explore-content #search form{
+    width: 91%;
+    position: relative;
+    display: flex;
+    margin: 20px auto;
+}
+
+.explore-content .searchTerm {
+    width: 100%;
+    border: 1px solid #c39f76;
+    border-right: none;
+    padding: 5px;
+    height: 36px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #c39f76;
+}
+
+.explore-content .searchTerm:focus{
+    color: #c39f76;
+    font-weight:600;
+}
+
+.explore-content .searchButton {
+    width: 40px;
+    height: 36px;
+    border: 1px solid #c39f76;
+    background: #c39f76;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.explore-content .searchButton:hover {
+    background: #d4b99a;
+    border: 1px solid #d4b99a;
+}
+
+/* Content Card */
+.details-card {
+	background: #ecf0f1;
+}
+
+.card-content {
+    overflow: hidden;
+    margin-bottom: 25px;
+	background: #ffffff;
+}
+
+.card-img {
+	position: relative;
+	overflow: hidden;
+    z-index: 1;
+}
+
+.card-img img {
+	width: 100%;
+    height: 250px;
+    object-fit: cover;
+	display: block;
+}
+
+.card-desc {
+    width: 100%;
+    height: 280px;
+    padding-top: 20px;
+}
+
+.card-desc h5 {
+    font-family: 'Playfair Display', serif;
+    color: #c39f76;
+    font-weight: 600;
+    line-height: 1.3em;
+    margin-top: 0;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.card-desc p {
+    font-family: 'Playfair Display', serif!important;
+	color: #747373;
+    font-size: 14px;
+	font-weight: 400;
+	font-size: 1em;
+	line-height: 1;
+	margin: 0px;
+	margin-bottom: 20px;
+	padding: 0;
+	font-family: 'Raleway', sans-serif;
+}
+
+.card-desc p.name{
+    font-style: italic
+}
+
+.card-desc a{
+    font-family: 'Playfair Display', serif;
+    color: #1ABC9C !important;
+    text-decoration: underline;
+}
+
+.card-desc input.btn{
+    font-family: 'Playfair Display', serif;
+    margin: 0 auto;
+    display: inline-block;
+    padding: 8px 22px 10px;
+    line-height: 1;
+    margin: 12px auto 0;
+    text-align: center;
+    color: white;
+    background: #c39f76;
+}
+
+.card-desc input.btn:hover {
+    background: #d4b99a;
+    color: white;
+}
+
+/* Individual Post */
+.post-content{
+    width: auto;
+    margin: 40px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.post-content h2{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.post-content p.card-text-author{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+}
+
+.post-content .card-body{
+    padding: 0 15px;
+    margin: 20px auto;
+    font-family: 'Playfair Display', serif;
+}
+
+.post-content .card-img-top{
+    width: 97%;
+    margin: 0 auto;
+}
+
+.post-content a{
+    font-family: 'Playfair Display', serif;
+    color: black!important;
+    padding: 0 20px;
+}
+
+/* Search Result */
+.search-content{
+    width: auto;
+    margin: 40px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.search-content h3{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.search-content h4{
+    font-family: 'Playfair Display', serif;
+    margin: 20px auto;
+}
+
+.search-content a{
+    font-family: 'Playfair Display', serif;
+    color: black!important;
+    padding: 20px !important;
+}
+
+/* My Posts */
+.userposts-content{
+    width: auto;
+    margin: 50px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.userposts-content h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.userposts-content i{
+    font-size: 22px;
+    color: #c39f76;
+}
+
+.userposts-content h3{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    margin: 20px auto;
+}
+
+/* Add Post */
+.add-form{
+    width: 650px;
+    margin: 20px auto;
+    padding: 0 40px;
+  	font-size: 15px;
+}
+
+.add-form form{
+    margin-bottom: 15px;
+    background: #ffffff;
+    padding: 30px;
+}
+
+.add-form h1{
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+/* Profile */
+.profile-content{
+    width: auto;
+    margin: 50px auto;
+    padding: 0 20px;
+  	font-size: 15px;
+}
+
+.profile-content .nav-item a{
+    color:black !important;
+}
+
+.profile-content .btn-primary{
+    background-color: #c39f76;
+    color: white;
+    border: #c39f76;
+}
+
+.profile-content .btn-primary:hover{
+    background-color: #d4b99a;
+    color: white;
+    border: #d4b99a;
+}
+
+/* recent travels */
+.profile-content .travels h3{
+    text-align: center;
+}
+
+.profile-content .travels .card-desc{
+    height:auto;
+}
+
+.profile-content h1, h3, h5, h4{
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    color: #c39f76;
+}
+
+.profile-content i{
+    font-size: 18px;
+}
+
+.profile-content i:hover{
+    cursor: pointer;
+}
+
+.modal-footer button{
+    background-color: #c39f76;
+    color: white;
+    border: #c39f76;
+}
+
+.modal-footer button:hover {
+    background-color: #d4b99a;
+    color: white;
+    border: #d4b99a;
+}
+
+@media only screen and (max-width: 690px){
+    .login-form, .register-form, .home-content, .add-form {
+        width: auto;
+    }
+
+    header.masthead h1 {
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
+@media only screen and (max-width: 1220px){
+    header.masthead .container{
+        margin-left: 0px;
+    }
+}
