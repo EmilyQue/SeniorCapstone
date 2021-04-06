@@ -12,7 +12,7 @@
                     <div class="col-md-4">
                         <div class="card-content">
                             <div class="card-img">
-                                <img src="images/{{$c->getImage()}}" alt="">
+                                <img src="resources/images/{{$c->getImage()}}" alt="">
                             </div>
                             <div class="card-desc">
                                 <h3>{{$c->getTitle()}}</h3>
