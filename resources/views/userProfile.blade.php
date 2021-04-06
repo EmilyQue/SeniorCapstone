@@ -98,8 +98,8 @@
                                         <div class="form-group row">
                                             <label class="col-lg-3 col-form-label form-control-label"></label>
                                             <div class="col-lg-9">
-                                                <input type="submit" class="btn" value="Save Changes">
-                                                <input type="reset" class="btn" value="Cancel">
+                                                <input type="submit" class="btn btn-primary" value="Save Changes">
+                                                <input type="button" onclick="window.location.replace('/profile')" class="btn btn-primary" value="Cancel">
                                             </div>
                                         </div>
                                     </form>

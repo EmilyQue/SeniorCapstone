@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <div class="card-content">
                         <div class="card-img">
-                            <img src="images/{{$c['image']}}" alt="">
+                            <img src="resources/images/{{$c['image']}}" alt="">
                         </div>
                         <div class="card-desc">
                             <h5 class="text-center">{{$c['title']}}</h5>
