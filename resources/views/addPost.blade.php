@@ -44,7 +44,7 @@
             height: 300,
             menubar: false,
             plugins: [
-                'insertdatetime media table paste code help wordcount'
+                'insertdatetime media lists table paste code help wordcount'
             ],
             toolbar: 'undo redo ' +
                 'bold italic | numlist bullist | help',
