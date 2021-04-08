@@ -66,7 +66,7 @@ class PostDataService {
         AppLogger::info("Entering PostDataService.findPostByName()");
         try{
             //prepared statement is created
-            $stmt = $this->conn->prepare("SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id WHERE posts.title LIKE '%".$post."%' OR posts.description LIKE '%".$post."%' ");
+            $stmt = $this->conn->prepare("SELECT posts.*, users.firstName, users.lastName FROM posts INNER JOIN users ON posts.users_id=users.id WHERE posts.title LIKE '%".$post."%' OR posts.description LIKE '%".$post."%' OR posts.content LIKE '%".$post."%'");
 
             //array is created and statement is executed
             // $list = array();
