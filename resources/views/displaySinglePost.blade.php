@@ -20,7 +20,7 @@
                     </div>
                     <img src="resources/images/{{$c['image']}}" class="card-img-top">
                     <div class="card-body">
-                    <p class="card-text">{{$c['content']}}</p>
+                    <p class="card-text">{!! $c['content'] !!}</p>
                     </div>
                 @endforeach
             @else

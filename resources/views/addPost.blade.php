@@ -1,3 +1,5 @@
+<!DOCTYPE HTML>
+
 @extends('layouts.appmaster')
 @section('title', 'Add Post')
 
@@ -15,7 +17,7 @@
                 <textarea class="form-control" name="description" placeholder="Enter description" required="required" rows="3"></textarea>
             </div>
             <div class="form-group">
-                <textarea class="form-control" name="content" placeholder="Enter text here..." required="required" rows="6"></textarea>
+                <textarea class="content" name="content" placeholder="Enter text here..." required="required" rows="6"></textarea>
             </div>
             <div class="form-group">
                 <input type="hidden" name="date"/>
@@ -33,4 +35,27 @@
             </div>
         </form>
     </div>
+    <script src="https://cdn.tiny.cloud/1/qlqj4mkrdpevlf3c2nlxh585ym3hii3907m42li43fmp3s94/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea.content',
+            apply_source_formatting : false,                //added option
+        verify_html : false,
+            height: 300,
+            menubar: false,
+            plugins: [
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo ' +
+                'bold italic | help',
+            content_css: '//www.tiny.cloud/css/codepen.min.css',
+            setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+    }
+        });
+    </script>
  @endsection
+
+
