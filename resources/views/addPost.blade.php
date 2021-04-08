@@ -39,7 +39,7 @@
     <script type="text/javascript">
         tinymce.init({
             selector: 'textarea.content',
-            apply_source_formatting : false,                //added option
+            apply_source_formatting : false,               
         verify_html : false,
             height: 300,
             menubar: false,
@@ -47,7 +47,7 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo ' +
-                'bold italic | help',
+                'bold italic | 'numlist bullist' | help',
             content_css: '//www.tiny.cloud/css/codepen.min.css',
             setup: function (editor) {
         editor.on('change', function () {
