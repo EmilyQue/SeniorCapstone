@@ -47,7 +47,7 @@
                 'insertdatetime media table paste code help wordcount'
             ],
             toolbar: 'undo redo ' +
-                'bold italic | 'numlist bullist' | help',
+                'bold italic | numlist bullist | help',
             content_css: '//www.tiny.cloud/css/codepen.min.css',
             setup: function (editor) {
         editor.on('change', function () {
