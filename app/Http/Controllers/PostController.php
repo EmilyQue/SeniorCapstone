@@ -19,7 +19,11 @@ class PostController extends Controller {
             $description = $request->input('description');
             $content = $request->input('content');
             $date = $request->input('date');
-            $image = $request->input('image');
+//             $image = $request->input('image');
+            $image = time().'.'.$request->image->extension();
+            
+            //test
+            $request->image->move(public_path('image'), $image);
 
             if($request->session()->has('user_id')) {
                 $user_id = $request->session()->get('user_id');
