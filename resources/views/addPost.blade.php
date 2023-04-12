@@ -23,7 +23,7 @@
                 <input type="hidden" name="date"/>
             </div>
             <div class="form-group">
-                <input type="file" id="myFile" name="image">
+                <input type="file" id="myFile" name="image" enctype="multipart/form-data">
             </div>
             <div class="form-group">
                 <input type="hidden" name="users_id"/>
