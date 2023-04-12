@@ -6,7 +6,7 @@
 @section('content')
 
     <div class="add-form">
-        <form action="addPost" method="POST">
+        <form action="addPost" method="POST" enctype="multipart/form-data">
             <h1 class="text-center">Add Post</h1>
 
             <input type="hidden" name="_token" value = "<?php echo csrf_token()?>">
@@ -23,7 +23,7 @@
                 <input type="hidden" name="date"/>
             </div>
             <div class="form-group">
-                <input type="file" id="myFile" name="image" enctype="multipart/form-data">
+                <input type="file" id="myFile" name="image">
             </div>
             <div class="form-group">
                 <input type="hidden" name="users_id"/>
